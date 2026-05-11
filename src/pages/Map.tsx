@@ -15,7 +15,7 @@ export default function Map() {
 
   return (
     <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
-      <div className="px-5 pt-14 pb-32 space-y-6">
+      <div className="px-6 pt-14 pb-32 space-y-6">
         <div className="flex items-center gap-4 mb-6">
           <button onClick={() => nav(-1)} className="w-12 h-12 rounded-full flex items-center justify-center active:scale-95 transition-transform" style={{background:'#090E17', border: '1px solid #1C2A3A'}}>
             <ArrowLeft size={24} className="text-white" />

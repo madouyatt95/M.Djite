@@ -52,7 +52,7 @@ export default function Home() {
         </div>
         <div className="absolute inset-0 h-[340px]" style={{ background: 'linear-gradient(180deg, rgba(5,7,11,0.2) 0%, rgba(5,7,11,0.9) 70%, #05070B 100%)' }} />
 
-        <div className="relative z-10 px-5 pt-14 pb-2">
+        <div className="relative z-10 px-6 pt-14 pb-2">
           {/* Top bar */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
@@ -92,7 +92,7 @@ export default function Home() {
       </div>
 
       {/* Cards */}
-      <div className="relative z-20 px-5 pb-32 -mt-2">
+      <div className="relative z-20 px-6 pb-32 -mt-2">
         {/* Total Investi - BLUE CARD */}
         <div className="rounded-[24px] p-6 shadow-xl mb-5" style={{ background: 'linear-gradient(180deg, rgba(14, 165, 255, 0.15) 0%, rgba(5, 7, 11, 0.95) 100%)', border: '1px solid rgba(14, 165, 255, 0.4)' }}>
           <div className="flex items-center gap-2 mb-3">

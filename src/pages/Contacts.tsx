@@ -13,7 +13,7 @@ export default function Contacts() {
 
   return (
     <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
-      <div className="px-5 pt-14">
+      <div className="px-6 pt-14">
         <h1 className="text-3xl font-bold text-white mb-8">Contacts</h1>
         
         <div className="relative mb-6">
@@ -37,10 +37,10 @@ export default function Contacts() {
         </div>
       </div>
       
-      <div className="px-5 pb-32 space-y-4">
+      <div className="px-6 pb-32 space-y-5">
         {list.map((c,i)=>(
           <button key={c.id} onClick={()=>nav(`/contacts/${c.id}`)} 
-            className="w-full rounded-[24px] p-4 flex items-center gap-4 text-left active:scale-[0.98] transition-transform"
+            className="w-full rounded-[24px] p-5 flex items-center gap-5 text-left active:scale-[0.98] transition-transform"
             style={{background:'#090E17',border:'1px solid #1C2A3A',animationDelay:`${i*40}ms`,animation:'fadeInUp 0.3s ease-out forwards',opacity:0}}>
             
             <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-gold/40">

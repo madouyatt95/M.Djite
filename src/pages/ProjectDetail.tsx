@@ -29,11 +29,11 @@ export default function ProjectDetail() {
         <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(5,7,11,0.2), rgba(5,7,11,0.95))' }} />
         
-        <button onClick={() => nav(-1)} className="absolute top-14 left-5 w-12 h-12 rounded-full flex items-center justify-center active:scale-95 transition-transform" style={{ background: 'rgba(5,7,11,0.6)', border: '1px solid rgba(255,255,255,0.2)' }}>
+        <button onClick={() => nav(-1)} className="absolute top-14 left-6 w-12 h-12 rounded-full flex items-center justify-center active:scale-95 transition-transform" style={{ background: 'rgba(5,7,11,0.6)', border: '1px solid rgba(255,255,255,0.2)' }}>
           <ArrowLeft size={24} className="text-white" />
         </button>
         
-        <div className="absolute bottom-5 left-5 right-5">
+        <div className="absolute bottom-5 left-6 right-6">
           <div className="flex items-start justify-between gap-3 mb-1">
             <h1 className="text-3xl font-bold text-white leading-tight">{p.name}</h1>
             <span className="px-3 py-1.5 rounded-full text-xs font-bold mt-1 flex-shrink-0" style={{ background: bStyle.bg, color: bStyle.text }}>{p.status}</span>
@@ -42,7 +42,7 @@ export default function ProjectDetail() {
         </div>
       </div>
 
-      <div className="px-5 pb-32 space-y-5 mt-4">
+      <div className="px-6 pb-32 space-y-5 mt-4">
         {/* KPIs */}
         <div className="grid grid-cols-2 gap-4">
           {[

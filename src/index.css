@@ -23,8 +23,16 @@ html, body {
   background: #05070B; color: #fff;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.015em;
+  line-height: 1.6;
   overflow: hidden; margin: 0;
 }
+
+h1, h2, h3, .font-bold { font-weight: 700; letter-spacing: -0.025em; }
+.font-medium { font-weight: 500; }
+.font-normal { font-weight: 400; }
+p, span, div { word-break: break-word; }
 
 #root {
   height: 100dvh; width: 100%;

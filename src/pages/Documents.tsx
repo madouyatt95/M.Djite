@@ -20,7 +20,7 @@ export default function Documents() {
 
   return (
     <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
-      <div className="px-5 pt-14 pb-8">
+      <div className="px-6 pt-14 pb-8">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
             <Lock size={28} className="text-gold" />
@@ -58,9 +58,9 @@ export default function Documents() {
           <h2 className="text-xl font-bold text-white">Ajouts Récents</h2>
           <ChevronRight size={20} className="text-gray-text" />
         </div>
-        <div className="space-y-3 pb-32">
+        <div className="space-y-4 pb-32">
           {recentFiles.map(file => (
-            <div key={file.id} className="rounded-2xl p-4 flex items-center gap-4" style={{background:'#090E17', border:'1px solid #1C2A3A'}}>
+            <div key={file.id} className="rounded-2xl p-5 flex items-center gap-5" style={{background:'#090E17', border:'1px solid #1C2A3A'}}>
               <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{background: 'rgba(239,68,68,0.1)'}}>
                 <FileText size={20} className="text-danger" />
               </div>

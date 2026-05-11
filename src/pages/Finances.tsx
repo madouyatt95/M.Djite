@@ -47,7 +47,7 @@ export default function Finances() {
 
   return (
     <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
-      <div className="px-5 pt-14 pb-32 space-y-6">
+      <div className="px-6 pt-14 pb-32 space-y-6">
         <div className="flex items-center justify-between mb-2">
           <h1 className="text-3xl font-bold text-white">Finances</h1>
           <button onClick={downloadPDF} disabled={isDownloading} className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-dark active:scale-95 transition-transform" style={{background: '#D4AF37', border: '1px solid #E8C84A'}}>
