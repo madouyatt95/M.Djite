@@ -9,7 +9,7 @@ export default function ContactDetail() {
 
   if (!contact) {
     return (
-      <div className="page-scroll flex items-center justify-center">
+      <div className=" flex items-center justify-center">
         <p className="text-gray-text">Contact non trouvé</p>
       </div>
     );
@@ -23,8 +23,8 @@ export default function ContactDetail() {
   ];
 
   return (
-    <div className="page-scroll page-enter bg-dark">
-      <div className="px-5 pt-[env(safe-area-inset-top,48px)] pb-8 space-y-6">
+    <div className="page-enter bg-dark">
+      <div className="px-5 pt-12 pb-8 space-y-6">
         {/* Back button */}
         <button 
           onClick={() => navigate(-1)}

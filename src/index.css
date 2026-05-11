@@ -23,17 +23,8 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
+html, body {
   height: 100%;
-  height: -webkit-fill-available;
-  width: 100%;
-  background-color: #05070B;
-  overflow: hidden;
-}
-
-body {
-  height: 100%;
-  min-height: -webkit-fill-available;
   width: 100%;
   background-color: #05070B;
   color: white;
@@ -47,16 +38,13 @@ body {
 
 #root {
   height: 100%;
-  height: -webkit-fill-available;
   width: 100%;
-  position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background-color: #05070B;
 }
 
-/* On desktop, center and constrain width */
 @media (min-width: 480px) {
   #root {
     max-width: 430px;
@@ -66,13 +54,11 @@ body {
   }
 }
 
-/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
 
-/* Gold gradient text utility */
 .text-gold-gradient {
   background: linear-gradient(135deg, #D4AF37, #E8C84A, #D4AF37);
   -webkit-background-clip: text;
@@ -80,16 +66,13 @@ body {
   background-clip: text;
 }
 
-/* Card glassmorphism - PREMIUM */
 .glass-card {
   background: rgba(11, 18, 32, 0.85);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(212, 175, 55, 0.18);
   border-radius: 20px;
-  box-shadow: 
-    0 4px 24px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .glass-card-sm {
@@ -101,20 +84,15 @@ body {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Gold highlight card */
 .glass-card-gold {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(11, 18, 32, 0.9) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: 20px;
-  box-shadow: 
-    0 4px 24px rgba(212, 175, 55, 0.08),
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(212, 175, 55, 0.1);
+  box-shadow: 0 4px 24px rgba(212, 175, 55, 0.08), 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(212, 175, 55, 0.1);
 }
 
-/* Gold button */
 .btn-gold {
   background: linear-gradient(135deg, #D4AF37, #E8C84A);
   color: #05070B;
@@ -127,43 +105,43 @@ body {
   box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
 }
 
-.btn-gold:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(212, 175, 55, 0.4);
-}
-
 .btn-gold:active {
   transform: scale(0.98);
 }
 
-/* Page container - scrollable */
-.page-scroll {
-  position: absolute;
-  inset: 0;
+/* ===== LAYOUT ===== */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.app-content {
+  flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.page-scroll::-webkit-scrollbar {
+.app-content::-webkit-scrollbar {
   display: none;
 }
 
-/* Page transition */
+.bottom-nav {
+  flex-shrink: 0;
+  padding-bottom: env(safe-area-inset-bottom, 6px);
+}
+
+/* Page animation */
 .page-enter {
   animation: fadeInUp 0.3s ease-out forwards;
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeIn {
@@ -172,34 +150,19 @@ body {
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulse-gold {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
-  }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
-}
+.animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
+.animate-slide-up { animation: slideUp 0.5s ease-out forwards; }
 
-.animate-slide-up {
-  animation: slideUp 0.5s ease-out forwards;
-}
-
-/* Recharts customization */
+/* Recharts */
 .recharts-text {
   fill: #9CA3AF !important;
   font-size: 10px !important;
@@ -211,13 +174,7 @@ body {
   stroke: rgba(31, 41, 55, 0.4) !important;
 }
 
-/* Bottom nav safe area */
-.bottom-nav {
-  padding-bottom: env(safe-area-inset-bottom, 6px);
-  flex-shrink: 0;
-}
-
-/* Hide scrollbar but allow scroll */
+/* Scroll hidden */
 .scroll-hidden {
   overflow-y: auto;
   overflow-x: hidden;
@@ -225,16 +182,12 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.scroll-hidden::-webkit-scrollbar {
-  display: none;
-}
+.scroll-hidden::-webkit-scrollbar { display: none; }
 
-/* Input styling */
 input, select, textarea {
   font-family: 'Inter', sans-serif;
 }
 
-/* Status badges */
 .badge-encours {
   background: rgba(14, 165, 255, 0.15);
   color: #0EA5FF;

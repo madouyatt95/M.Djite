@@ -13,9 +13,9 @@ export default function Alerts() {
   const [activeFilter, setActiveFilter] = useState('Toutes');
 
   return (
-    <div className="page-scroll page-enter bg-dark">
+    <div className="page-enter bg-dark">
       {/* Header - sticky */}
-      <div className="sticky top-0 z-20 bg-dark px-5 pt-[env(safe-area-inset-top,48px)] pb-3">
+      <div className="sticky top-0 z-20 bg-dark px-5 pt-12 pb-3">
         <h1 className="text-xl font-bold text-white mb-5">Alertes</h1>
 
         {/* Filters */}

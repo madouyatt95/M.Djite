@@ -16,7 +16,7 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="page-scroll flex items-center justify-center">
+      <div className=" flex items-center justify-center">
         <p className="text-gray-text">Projet non trouvé</p>
       </div>
     );
@@ -26,7 +26,7 @@ export default function ProjectDetail() {
   const benefitPrefix = project.benefitNet >= 0 ? '+' : '';
 
   return (
-    <div className="page-scroll page-enter bg-dark">
+    <div className="page-enter bg-dark">
       {/* Cover Image */}
       <div className="relative h-56">
         <img 

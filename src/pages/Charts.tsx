@@ -79,8 +79,8 @@ export default function Charts() {
   const [activeTab, setActiveTab] = useState('Investissements');
 
   return (
-    <div className="page-scroll page-enter bg-dark">
-      <div className="px-5 pt-[env(safe-area-inset-top,48px)] pb-8 space-y-4">
+    <div className="page-enter bg-dark">
+      <div className="px-5 pt-12 pb-8 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-white">Graphiques</h1>

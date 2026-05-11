@@ -27,9 +27,9 @@ export default function Projects() {
   });
 
   return (
-    <div className="page-scroll page-enter bg-dark">
+    <div className="page-enter bg-dark">
       {/* Header */}
-      <div className="sticky top-0 z-20 px-5 pt-[env(safe-area-inset-top,48px)] pb-3" style={{
+      <div className="sticky top-0 z-20 px-5 pt-12 pb-3" style={{
         background: 'linear-gradient(to bottom, #05070B 80%, rgba(5,7,11,0.95))',
       }}>
         <div className="flex items-center justify-between mb-5">

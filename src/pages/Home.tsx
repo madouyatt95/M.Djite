@@ -22,7 +22,7 @@ export default function Home() {
   const totalProjects = projects.length;
 
   return (
-    <div className="page-scroll page-enter bg-dark">
+    <div className="page-enter bg-dark">
       {/* Hero section with skyline */}
       <div className="relative min-h-[280px]">
         {/* Skyline background */}
@@ -39,7 +39,7 @@ export default function Home() {
         }} />
 
         {/* Header */}
-        <div className="relative z-10 px-5 pt-[env(safe-area-inset-top,48px)] pb-4">
+        <div className="relative z-10 px-5 pt-12 pb-4">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className="w-11 h-11 rounded-xl overflow-hidden" style={{

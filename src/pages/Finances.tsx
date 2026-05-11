@@ -30,8 +30,8 @@ export default function Finances() {
   const [_period] = useState('Année en cours');
 
   return (
-    <div className="page-scroll page-enter bg-dark">
-      <div className="px-5 pt-[env(safe-area-inset-top,48px)] pb-8 space-y-4">
+    <div className="page-enter bg-dark">
+      <div className="px-5 pt-12 pb-8 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-[20px] font-bold text-white">Finances</h1>

@@ -15,8 +15,8 @@ export default function Settings() {
   const navigate = useNavigate();
 
   return (
-    <div className="page-scroll page-enter bg-dark">
-      <div className="px-5 pt-[env(safe-area-inset-top,48px)] pb-8 space-y-6">
+    <div className="page-enter bg-dark">
+      <div className="px-5 pt-12 pb-8 space-y-6">
         {/* Back */}
         <button 
           onClick={() => navigate(-1)}
