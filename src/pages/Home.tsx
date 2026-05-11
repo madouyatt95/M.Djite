@@ -62,9 +62,9 @@ export default function Home() {
       </div>
 
       {/* Cards */}
-      <div className="px-4 pb-6 space-y-3 -mt-2">
+      <div className="px-4 pb-24 space-y-3 -mt-2">
         {/* Total Investi - BLUE CARD */}
-        <div className="card-blue">
+        <div className="rounded-2xl p-4" style={{ background: 'linear-gradient(180deg, rgba(14, 165, 255, 0.12) 0%, rgba(5, 7, 11, 0.95) 100%)', border: '1px solid rgba(14, 165, 255, 0.4)' }}>
           <div className="flex items-center gap-2 mb-2">
             <Presentation size={14} className="text-electric-blue" />
             <span className="text-gray-text text-[12px] font-medium">Total Investi</span>
