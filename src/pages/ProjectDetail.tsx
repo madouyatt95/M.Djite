@@ -2,143 +2,89 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, TrendingUp, TrendingDown, DollarSign, Receipt } from 'lucide-react';
 import { projects, formatFullAmount } from '../data/projects';
 
-const statusColorMap: Record<string, string> = {
-  'En cours': 'bg-electric-blue/20 text-electric-blue border-electric-blue/30',
-  'Actif': 'bg-success/20 text-success border-success/30',
-  'Terminé': 'bg-gray-text/20 text-gray-text border-gray-text/30',
-  'Idée': 'bg-warning/20 text-warning border-warning/30',
+const badgeClass: Record<string, string> = {
+  'En cours': 'badge badge-encours', 'Actif': 'badge badge-actif',
+  'Terminé': 'badge badge-termine', 'Idée': 'badge badge-idee',
 };
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const project = projects.find(p => p.id === id);
-
-  if (!project) {
-    return (
-      <div className=" flex items-center justify-center">
-        <p className="text-gray-text">Projet non trouvé</p>
-      </div>
-    );
-  }
+  if (!project) return <div className="flex items-center justify-center h-full"><p className="text-gray-text">Projet non trouvé</p></div>;
 
   const benefitColor = project.benefitNet >= 0 ? 'text-success' : 'text-danger';
   const benefitPrefix = project.benefitNet >= 0 ? '+' : '';
 
   return (
-    <div className="page-enter bg-dark">
-      {/* Cover Image */}
-      <div className="relative h-56">
-        <img 
-          src={project.image} 
-          alt={project.name} 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to bottom, rgba(5,7,11,0.3) 0%, rgba(5,7,11,0.9) 100%)',
-        }} />
-        
-        {/* Back button */}
-        <button 
-          onClick={() => navigate(-1)}
-          className="absolute top-14 left-5 w-10 h-10 rounded-full bg-dark/60 backdrop-blur-sm flex items-center justify-center border border-white/10"
-        >
+    <div className="page-enter">
+      <div className="relative h-52">
+        <img src={project.image} alt={project.name} className="w-full h-full object-cover" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(5,7,11,0.2), rgba(5,7,11,0.9))' }} />
+        <button onClick={() => navigate(-1)} className="absolute top-12 left-4 w-10 h-10 rounded-full bg-dark/60 backdrop-blur flex items-center justify-center border border-white/10">
           <ArrowLeft size={20} className="text-white" />
         </button>
-
-        {/* Title on image */}
-        <div className="absolute bottom-5 left-5 right-5">
-          <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-2xl font-bold text-white">{project.name}</h1>
-            <span className={`px-3 py-1 rounded-full text-xs font-medium border ${statusColorMap[project.status]}`}>
-              {project.status}
-            </span>
+        <div className="absolute bottom-4 left-4 right-4">
+          <div className="flex items-center gap-2 mb-1">
+            <h1 className="text-xl font-bold text-white">{project.name}</h1>
+            <span className={badgeClass[project.status] || 'badge badge-termine'}>{project.status}</span>
           </div>
           <p className="text-sm text-gray-text">{project.sector}</p>
         </div>
       </div>
 
-      {/* KPI Cards */}
-      <div className="px-5 space-y-5 pb-8">
-        <div className="grid grid-cols-2 gap-3 mt-5">
-          <div className="glass-card p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <DollarSign size={14} className="text-gold" />
-              <span className="text-xs text-gray-text">Investi</span>
-            </div>
-            <p className="text-sm font-bold text-white">{formatFullAmount(project.investmentInitial)}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
-          </div>
-          <div className="glass-card p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <Receipt size={14} className="text-danger" />
-              <span className="text-xs text-gray-text">Dépenses</span>
-            </div>
-            <p className="text-sm font-bold text-white">{formatFullAmount(project.expenses)}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
-          </div>
-          <div className="glass-card p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <TrendingUp size={14} className="text-success" />
-              <span className="text-xs text-gray-text">Revenus</span>
-            </div>
-            <p className="text-sm font-bold text-white">{formatFullAmount(project.revenues)}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
-          </div>
-          <div className="glass-card p-4">
-            <div className="flex items-center gap-2 mb-2">
-              {project.benefitNet >= 0 ? <TrendingUp size={14} className="text-success" /> : <TrendingDown size={14} className="text-danger" />}
-              <span className="text-xs text-gray-text">Bénéfice Net</span>
-            </div>
-            <p className={`text-sm font-bold ${benefitColor}`}>
-              {benefitPrefix}{formatFullAmount(project.benefitNet)}
-            </p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
-          </div>
+      <div className="px-4 pb-6 space-y-4 mt-4">
+        <div className="grid grid-cols-2 gap-3">
+          {[
+            { icon: DollarSign, label: 'Investi', value: formatFullAmount(project.investmentInitial), color: 'text-gold', iconColor: 'text-gold' },
+            { icon: Receipt, label: 'Dépenses', value: formatFullAmount(project.expenses), color: 'text-white', iconColor: 'text-danger' },
+            { icon: TrendingUp, label: 'Revenus', value: formatFullAmount(project.revenues), color: 'text-white', iconColor: 'text-success' },
+            { icon: project.benefitNet >= 0 ? TrendingUp : TrendingDown, label: 'Bénéfice Net', value: `${benefitPrefix}${formatFullAmount(project.benefitNet)}`, color: benefitColor, iconColor: benefitColor },
+          ].map((kpi, i) => {
+            const Icon = kpi.icon;
+            return (
+              <div key={i} className="glass-card p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <Icon size={14} className={kpi.iconColor} />
+                  <span className="text-xs text-gray-text">{kpi.label}</span>
+                </div>
+                <p className={`text-sm font-bold ${kpi.color}`}>{kpi.value}</p>
+                <p className="text-[10px] text-gray-text">FCFA</p>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Progression */}
         <div className="glass-card p-5">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-white">Progression</span>
+            <span className="text-sm font-bold text-white">Progression</span>
             <span className="text-sm font-bold text-gold">{project.progression}%</span>
           </div>
           <div className="h-2.5 bg-dark rounded-full overflow-hidden">
-            <div 
-              className="h-full rounded-full transition-all duration-1000"
-              style={{ 
-                width: `${project.progression}%`,
-                background: 'linear-gradient(90deg, #D4AF37, #E8C84A)',
-              }}
-            />
+            <div className="h-full rounded-full" style={{ width: `${project.progression}%`, background: 'linear-gradient(90deg, #D4AF37, #E8C84A)' }} />
           </div>
         </div>
 
-        {/* Information */}
         <div className="glass-card p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Informations</h3>
+          <h3 className="text-sm font-bold text-white mb-3">Informations</h3>
           <div className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-xs text-gray-text">Localisation</span>
-              <span className="text-xs text-white font-medium">{project.city}, {project.country}</span>
-            </div>
-            <div className="h-px bg-gray-border/20" />
-            <div className="flex justify-between">
-              <span className="text-xs text-gray-text">Date de démarrage</span>
-              <span className="text-xs text-white font-medium">{project.startDate}</span>
-            </div>
-            <div className="h-px bg-gray-border/20" />
-            <div className="flex justify-between">
-              <span className="text-xs text-gray-text">Responsable</span>
-              <span className="text-xs text-white font-medium">{project.responsible}</span>
-            </div>
+            {[
+              { l: 'Localisation', v: `${project.city}, ${project.country}` },
+              { l: 'Démarrage', v: project.startDate },
+              { l: 'Responsable', v: project.responsible },
+            ].map((item, i) => (
+              <div key={i}>
+                {i > 0 && <div className="h-px bg-gray-border/20 mb-3" />}
+                <div className="flex justify-between">
+                  <span className="text-xs text-gray-text">{item.l}</span>
+                  <span className="text-xs text-white font-medium">{item.v}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* CTA */}
-        <button className="btn-gold w-full text-sm font-bold">
-          Voir les détails financiers
-        </button>
+        <button className="btn-gold w-full text-sm font-bold">Voir les détails financiers</button>
       </div>
     </div>
   );
