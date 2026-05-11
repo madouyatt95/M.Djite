@@ -11,8 +11,11 @@ const tabs = [
 ];
 
 const moreItems = [
-  { label: 'Documents', path: '/documents', icon: '📄' },
-  { label: 'Contacts', path: '/contacts', icon: '👥' },
+  { label: 'Coffre-Fort', path: '/documents', icon: '🔐' },
+  { label: 'Calendrier', path: '/calendar', icon: '📅' },
+  { label: 'CRM Partenaires', path: '/contacts', icon: '🤝' },
+  { label: 'Carte Mondiale', path: '/map', icon: '🌍' },
+  { label: 'Organigramme', path: '/org-chart', icon: '🏢' },
   { label: 'Alertes', path: '/alerts', icon: '🔔' },
   { label: 'Paramètres', path: '/settings', icon: '⚙️' },
 ];
@@ -26,7 +29,7 @@ export default function BottomNav() {
     if (path === '/') return location.pathname === '/';
     return location.pathname.startsWith(path);
   };
-  const moreActive = ['/documents', '/contacts', '/alerts', '/settings'].some(p => location.pathname.startsWith(p));
+  const moreActive = ['/documents', '/contacts', '/alerts', '/settings', '/calendar', '/map', '/org-chart'].some(p => location.pathname.startsWith(p));
 
   return (
     <>

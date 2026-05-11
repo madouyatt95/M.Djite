@@ -21,7 +21,7 @@ export default function ContactDetail() {
             <img src={c.avatar} alt={c.name} className="w-full h-full object-cover" />
           </div>
           <h1 className="text-2xl font-bold text-white mb-1">{c.name}</h1>
-          <p className="text-base text-gold font-medium">{c.function}</p>
+          <p className="text-base text-gold font-medium">{c.role}</p>
         </div>
 
         <div className="grid grid-cols-4 gap-4 mb-6">
@@ -45,7 +45,7 @@ export default function ContactDetail() {
           <p className="text-lg font-bold text-white mb-5">Informations</p>
           {[
             { l: 'Téléphone', v: c.phone }, { l: 'Email', v: c.email },
-            { l: 'Adresse', v: c.address }, { l: 'Projets liés', v: c.linkedProjects || 'Aucun' },
+            { l: 'Adresse', v: c.address }
           ].map((item, i) => (
             <div key={i}>
               {i > 0 && <div className="h-[1.5px] my-4" style={{background:'#1C2A3A'}}/>}
@@ -57,10 +57,31 @@ export default function ContactDetail() {
           ))}
         </div>
 
-        <div className="rounded-3xl p-6" style={{background:'#090E17', border:'1px solid #1C2A3A'}}>
-          <p className="text-lg font-bold text-white mb-3">Notes</p>
-          <p className="text-sm text-gray-text leading-relaxed font-medium">{c.notes}</p>
+        <h2 className="text-xl font-bold text-white mb-4">Historique des Échanges</h2>
+        <div className="space-y-4">
+          <div className="rounded-2xl p-4" style={{background:'#090E17', border:'1px solid #1C2A3A'}}>
+            <div className="flex justify-between items-start mb-2">
+              <span className="text-sm font-bold text-gold">Appel Sortant</span>
+              <span className="text-xs text-gray-text">Aujourd'hui, 14:30</span>
+            </div>
+            <p className="text-sm text-white font-medium">Point sur le financement. Accord de principe obtenu.</p>
+          </div>
+          <div className="rounded-2xl p-4" style={{background:'#090E17', border:'1px solid #1C2A3A'}}>
+            <div className="flex justify-between items-start mb-2">
+              <span className="text-sm font-bold" style={{color: '#0EA5FF'}}>Email Reçu</span>
+              <span className="text-xs text-gray-text">10 Mai 2026</span>
+            </div>
+            <p className="text-sm text-white font-medium">Envoi des documents légaux signés pour le projet.</p>
+          </div>
+          <div className="rounded-2xl p-4" style={{background:'#090E17', border:'1px solid #1C2A3A'}}>
+            <div className="flex justify-between items-start mb-2">
+              <span className="text-sm font-bold text-success">Rendez-vous</span>
+              <span className="text-xs text-gray-text">2 Avril 2026</span>
+            </div>
+            <p className="text-sm text-white font-medium">Rencontre physique au cabinet pour discuter des aspects fiscaux.</p>
+          </div>
         </div>
+
       </div>
     </div>
   );

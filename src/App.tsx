@@ -15,6 +15,9 @@ import ContactDetail from './pages/ContactDetail';
 import Alerts from './pages/Alerts';
 import Settings from './pages/Settings';
 import AddProject from './pages/AddProject';
+import Map from './pages/Map';
+import Calendar from './pages/Calendar';
+import OrgChart from './pages/OrgChart';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -40,6 +43,9 @@ function AnimatedRoutes() {
           <Route path="/alerts" element={<Alerts />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/add-project" element={<AddProject />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/calendar" element={<Calendar />} />
+          <Route path="/org-chart" element={<OrgChart />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </motion.div>

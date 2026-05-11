@@ -1,8 +1,8 @@
 export interface Contact {
   id: string;
   name: string;
-  function: string;
-  category: 'Avocat' | 'Notaire' | 'Police' | 'Admin' | 'Autres';
+  role: string;
+  category: 'Investisseurs' | 'Ministres' | 'Partenaires' | 'Fournisseurs';
   phone: string;
   email: string;
   address: string;
@@ -14,76 +14,86 @@ export interface Contact {
 export const contacts: Contact[] = [
   {
     id: '1',
-    name: 'Maître A. Diop',
-    function: 'Avocat',
-    category: 'Avocat',
+    name: 'Amadou Lamine',
+    role: 'Ministre des Finances',
+    category: 'Ministres',
     phone: '+221 77 123 45 67',
-    email: 'adiop.avocat@gmail.com',
-    address: 'Almadies, Dakar - Sénégal',
-    linkedProjects: 'Immeuble Fann Hock, Al Bourak',
-    notes: 'Conseiller juridique principal. Très fiable et disponible.',
-    avatar: '/images/avatar_avocat.png'
+    email: 'amadou.lamine@gouv.sn',
+    address: 'Dakar-Plateau, Sénégal',
+    linkedProjects: 'Immeuble Fann Hock',
+    notes: 'Contact stratégique pour les exonérations fiscales.',
+    avatar: '/images/avatar_admin.png'
   },
   {
     id: '2',
-    name: 'Merissa Ndiaye',
-    function: 'Notaire',
-    category: 'Notaire',
-    phone: '+221 78 234 56 78',
-    email: 'mndiaye.notaire@gmail.com',
-    address: 'Plateau, Dakar - Sénégal',
-    linkedProjects: 'Immeuble Fann Hock',
-    notes: 'Notaire de confiance pour toutes les transactions immobilières.',
+    name: 'Me. Fatou Diop',
+    role: 'Notaire Principale',
+    category: 'Partenaires',
+    phone: '+221 77 987 65 43',
+    email: 'f.diop@notaires.sn',
+    address: 'Almadies, Dakar',
+    linkedProjects: 'Tous',
+    notes: 'En charge de toutes les acquisitions foncières.',
     avatar: '/images/avatar_notaire.png'
   },
   {
     id: '3',
-    name: 'Commissaire Fall',
-    function: 'Police',
-    category: 'Police',
-    phone: '+221 76 345 67 89',
-    email: 'cfall.police@gouv.sn',
-    address: 'Médina, Dakar - Sénégal',
-    linkedProjects: 'Laser Park Abidjan',
-    notes: 'Contact sécurité. Disponible en cas d\'urgence.',
+    name: 'Insp. Cheikh',
+    role: 'Inspecteur Général',
+    category: 'Partenaires',
+    phone: '+221 78 555 44 33',
+    email: 'cheikh.insp@police.sn',
+    address: 'Dakar',
+    linkedProjects: 'Sécurité globale',
+    notes: 'Assure la sécurité des sites.',
     avatar: '/images/avatar_police.png'
   },
   {
     id: '4',
-    name: 'M. Diagne',
-    function: 'Administration',
-    category: 'Admin',
-    phone: '+221 70 456 78 90',
-    email: 'mdiagne.admin@gouv.sn',
-    address: 'Dakar Plateau - Sénégal',
-    linkedProjects: 'Poulailler, Des Coups Verts',
-    notes: 'Responsable administratif des autorisations.',
-    avatar: '/images/avatar_admin.png'
+    name: 'Cabinet Fall',
+    role: 'Avocats d\'Affaires',
+    category: 'Partenaires',
+    phone: '+221 76 111 22 33',
+    email: 'contact@cabinet-fall.sn',
+    address: 'Plateau, Dakar',
+    linkedProjects: 'Litiges, Contrats',
+    notes: 'Rédaction des contrats de partenariat.',
+    avatar: '/images/avatar_avocat.png'
   },
   {
     id: '5',
-    name: 'Capitaine Touré',
-    function: 'Gendarmerie',
-    category: 'Autres',
-    phone: '+221 77 567 89 01',
-    email: 'ctoure@gend.sn',
-    address: 'Guédiawaye, Dakar - Sénégal',
-    linkedProjects: 'Al Bourak',
-    notes: 'Contact gendarmerie pour les aspects sécuritaires.',
-    avatar: '/images/avatar_capitaine.png'
+    name: 'Dr. Ousmane',
+    role: 'Investisseur Privé',
+    category: 'Investisseurs',
+    phone: '+221 70 999 88 77',
+    email: 'ousmane@health-consult.sn',
+    address: 'Point E, Dakar',
+    linkedProjects: 'Clinique Privée (Idée)',
+    notes: 'Intéressé par le financement du pôle santé.',
+    avatar: '/images/avatar_medecin.png'
   },
   {
     id: '6',
-    name: 'Dr. Sall',
-    function: 'Médecin',
-    category: 'Autres',
-    phone: '+221 78 678 90 12',
-    email: 'drsall@sante.sn',
-    address: 'Fann, Dakar - Sénégal',
-    linkedProjects: '',
-    notes: 'Médecin personnel. Consultation et suivi de santé.',
-    avatar: '/images/avatar_medecin.png'
+    name: 'Capitaine Ndiaye',
+    role: 'Chef Douane',
+    category: 'Partenaires',
+    phone: '+221 77 444 55 66',
+    email: 'ndiaye.douane@gouv.sn',
+    address: 'Port de Dakar',
+    linkedProjects: 'Importation Matériel',
+    notes: 'Facilitation douanière pour le Laser Park.',
+    avatar: '/images/avatar_capitaine.png'
+  },
+  {
+    id: '7',
+    name: 'Jean Dupont',
+    role: 'Fournisseur Matériaux',
+    category: 'Fournisseurs',
+    phone: '+33 6 12 34 56 78',
+    email: 'jdupont@fournisseur.fr',
+    address: 'Paris, France',
+    linkedProjects: 'Immeuble Fann Hock',
+    notes: 'Fournisseur d\'acier et ciment spécialisé.',
+    avatar: '/images/avatar_admin.png'
   }
 ];
-
-export const contactCategories = ['Tous', 'Avocat', 'Notaire', 'Police', 'Admin', 'Autres'];

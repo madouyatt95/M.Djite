@@ -1,69 +1,79 @@
 import { useState } from 'react';
-import { Search, FileText, FileSpreadsheet, File, Plus } from 'lucide-react';
-import { documents, documentFilters } from '../data/documents';
+import { Search, Plus, Lock, Folder, FileText, ChevronRight } from 'lucide-react';
 
-const icons: Record<string,{icon:typeof FileText,color:string}> = {
-  'PDF':{icon:FileText,color:'#EF4444'},'Excel':{icon:FileSpreadsheet,color:'#22C55E'},'Word':{icon:File,color:'#3B82F6'},
-};
+const folders = [
+  { id: 1, name: 'Statuts & Kbis', count: 4, color: '#D4AF37' },
+  { id: 2, name: 'Contrats', count: 12, color: '#0EA5FF' },
+  { id: 3, name: 'Titres Fonciers', count: 8, color: '#22C55E' },
+  { id: 4, name: 'Passeports & ID', count: 3, color: '#8B5CF6' },
+  { id: 5, name: 'Assurances', count: 5, color: '#F59E0B' },
+  { id: 6, name: 'Décisions de Justice', count: 2, color: '#EF4444' },
+];
+
+const recentFiles = [
+  { id: 101, name: 'Titre Foncier_Immeuble Fann.pdf', size: '2.4 MB', date: 'Aujourd\'hui' },
+  { id: 102, name: 'Contrat_Partenariat_Guinée.pdf', size: '1.1 MB', date: 'Hier' },
+];
 
 export default function Documents() {
-  const [filter, setFilter] = useState('Tous');
   const [search, setSearch] = useState('');
-  const list = documents.filter(d => (filter==='Tous'||d.category===filter) && d.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
-      <div className="px-5 pt-14">
+      <div className="px-5 pt-14 pb-8">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-white">Documents</h1>
-          <button onClick={() => alert('Fonctionnalité en cours de développement')} className="w-12 h-12 rounded-full bg-gold flex items-center justify-center shadow-lg shadow-gold/20 active:scale-95 transition-transform">
+          <div className="flex items-center gap-3">
+            <Lock size={28} className="text-gold" />
+            <h1 className="text-3xl font-bold text-white">Coffre-Fort</h1>
+          </div>
+          <button onClick={() => alert('Authentification requise')} className="w-12 h-12 rounded-full bg-gold flex items-center justify-center shadow-lg shadow-gold/20 active:scale-95 transition-transform">
             <Plus size={28} className="text-white" strokeWidth={2.5} />
           </button>
         </div>
         
-        <div className="relative mb-6">
+        <div className="relative mb-8">
           <Search size={22} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-text"/>
-          <input type="text" placeholder="Rechercher un document..." value={search} onChange={e=>setSearch(e.target.value)} 
+          <input type="text" placeholder="Rechercher dans le coffre..." value={search} onChange={e=>setSearch(e.target.value)} 
             className="w-full pl-12 pr-4 py-4 rounded-2xl text-base text-white placeholder:text-gray-text outline-none focus:border-gold/50 transition-colors"
             style={{background:'#090E17', border:'1.5px solid #1C2A3A'}}/>
         </div>
-        
-        <div className="flex gap-8 mb-6 overflow-x-auto no-scrollbar border-b border-white/10">
-          {documentFilters.map(f=>{
-            const active = filter===f;
-            return (
-            <button key={f} onClick={()=>setFilter(f)} 
-              className={`pb-4 text-base font-medium whitespace-nowrap relative transition-colors ${active?'text-white':'text-gray-text hover:text-white'}`}>
-              {f}
-              {active && <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold rounded-t-full" />}
-            </button>
-            )
-          })}
-        </div>
-      </div>
-      
-      <div className="px-5 pb-32 space-y-4">
-        {list.map((doc,i) => {
-          const t=icons[doc.type]; const Icon=t.icon;
-          return (
-            <div key={doc.id} className="rounded-[24px] p-4 flex items-center gap-4 active:scale-[0.98] transition-transform" 
-              style={{background:'#090E17',border:'1px solid #1C2A3A',animationDelay:`${i*40}ms`,animation:'fadeInUp 0.3s ease-out forwards',opacity:0}}>
-              
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style={{background:`${t.color}15`,border:`1px solid ${t.color}30`}}>
-                <Icon size={24} style={{color:t.color}}/>
+
+        <h2 className="text-xl font-bold text-white mb-4">Dossiers Sécurisés</h2>
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          {folders.map((f, i) => (
+            <button key={f.id} className="rounded-[24px] p-5 text-left flex flex-col gap-3 active:scale-[0.98] transition-transform" 
+              style={{background:'#090E17', border:'1px solid #1C2A3A', animationDelay:`${i*40}ms`,animation:'fadeInUp 0.3s ease-out forwards',opacity:0}}>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{background: `${f.color}15`}}>
+                <Folder size={24} style={{color: f.color}} />
               </div>
-              
+              <div>
+                <p className="text-base font-bold text-white leading-tight">{f.name}</p>
+                <p className="text-xs text-gray-text font-medium mt-1">{f.count} fichiers</p>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-white">Ajouts Récents</h2>
+          <ChevronRight size={20} className="text-gray-text" />
+        </div>
+        <div className="space-y-3 pb-32">
+          {recentFiles.map(file => (
+            <div key={file.id} className="rounded-2xl p-4 flex items-center gap-4" style={{background:'#090E17', border:'1px solid #1C2A3A'}}>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{background: 'rgba(239,68,68,0.1)'}}>
+                <FileText size={20} className="text-danger" />
+              </div>
               <div className="flex-1 min-w-0">
-                <p className="text-base font-bold text-white truncate mb-1">{doc.name}</p>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs px-2 py-1 rounded-md font-bold" style={{background:`${t.color}15`,color:t.color}}>{doc.type}</span>
-                  <span className="text-xs font-medium text-gray-text">{doc.size}</span>
-                  <span className="text-xs font-medium text-gray-text">{doc.date}</span>
+                <p className="text-sm font-bold text-white truncate mb-0.5">{file.name}</p>
+                <div className="flex gap-2">
+                  <span className="text-[11px] text-gray-text font-medium">{file.size}</span>
+                  <span className="text-[11px] text-gray-text font-medium">{file.date}</span>
                 </div>
               </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );

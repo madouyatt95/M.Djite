@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Phone } from 'lucide-react';
-import { contacts, contactCategories } from '../data/contacts';
+import { Search, Phone, History } from 'lucide-react';
+import { contacts } from '../data/contacts';
+
+const crmCategories = ['Tous', 'Investisseurs', 'Ministres', 'Partenaires', 'Fournisseurs'];
 
 export default function Contacts() {
   const nav = useNavigate();
@@ -22,7 +24,7 @@ export default function Contacts() {
         </div>
         
         <div className="flex gap-8 mb-6 overflow-x-auto no-scrollbar border-b border-white/10">
-          {contactCategories.map(c=>{
+          {crmCategories.map(c=>{
             const active = cat===c;
             return (
             <button key={c} onClick={()=>setCat(c)} 
@@ -47,7 +49,7 @@ export default function Contacts() {
             
             <div className="flex-1 min-w-0">
               <p className="text-lg font-bold text-white truncate mb-0.5">{c.name}</p>
-              <p className="text-sm font-medium text-gray-text">{c.function}</p>
+              <p className="text-sm font-medium text-gray-text">{c.role}</p>
             </div>
             
             <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 active:scale-95 transition-transform" 
