@@ -3,115 +3,73 @@ import { ChevronDown } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { formatFullAmount, getTotalInvested, getTotalRevenues, getTotalBenefits, getTotalExpenses } from '../data/projects';
 
-const monthlyData = [
-  { name: 'Jan', inv: 800, rev: 400, ben: 200 },
-  { name: 'Fév', inv: 900, rev: 500, ben: 250 },
-  { name: 'Mar', inv: 1100, rev: 650, ben: 300 },
-  { name: 'Avr', inv: 950, rev: 700, ben: 380 },
-  { name: 'Mai', inv: 1200, rev: 850, ben: 420 },
-  { name: 'Juin', inv: 1350, rev: 900, ben: 480 },
-  { name: 'Juil', inv: 1100, rev: 950, ben: 520 },
-  { name: 'Août', inv: 1400, rev: 1100, ben: 600 },
-  { name: 'Sep', inv: 1250, rev: 1050, ben: 550 },
-  { name: 'Oct', inv: 1500, rev: 1200, ben: 650 },
-  { name: 'Nov', inv: 1300, rev: 1100, ben: 580 },
-  { name: 'Déc', inv: 1600, rev: 1300, ben: 700 },
+const monthly = [
+  { n: 'Jan', i: 800, r: 400, b: 200 }, { n: 'Fév', i: 900, r: 500, b: 250 },
+  { n: 'Mar', i: 1100, r: 650, b: 300 }, { n: 'Avr', i: 950, r: 700, b: 380 },
+  { n: 'Mai', i: 1200, r: 850, b: 420 }, { n: 'Juin', i: 1350, r: 900, b: 480 },
+  { n: 'Juil', i: 1100, r: 950, b: 520 }, { n: 'Août', i: 1400, r: 1100, b: 600 },
+  { n: 'Sep', i: 1250, r: 1050, b: 550 }, { n: 'Oct', i: 1500, r: 1200, b: 650 },
+  { n: 'Nov', i: 1300, r: 1100, b: 580 }, { n: 'Déc', i: 1600, r: 1300, b: 700 },
 ];
-
-const expenseBreakdown = [
-  { name: 'Construction', value: 40, color: '#D4AF37' },
-  { name: 'Équipement', value: 25, color: '#0EA5FF' },
-  { name: 'Fonctionnement', value: 15, color: '#8B5CF6' },
-  { name: 'Marketing', value: 10, color: '#22C55E' },
+const expenses = [
+  { name: 'Construction', value: 40, color: '#D4AF37' }, { name: 'Équipement', value: 25, color: '#0EA5FF' },
+  { name: 'Fonctionnement', value: 15, color: '#8B5CF6' }, { name: 'Marketing', value: 10, color: '#22C55E' },
   { name: 'Divers', value: 10, color: '#F59E0B' },
 ];
+const tip = { background: '#0C1422', border: '1px solid #1C2A3A', borderRadius: 10, fontSize: 10, color: '#fff' };
 
 export default function Finances() {
-  const [_period] = useState('Année en cours');
-
+  const [_] = useState('');
   return (
     <div className="page-enter">
-      <div className="px-4 pt-12 pb-6 space-y-4">
-        {/* Header */}
+      <div className="px-4 pt-12 pb-6 space-y-3">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-white">Finances</h1>
-          <button className="flex items-center gap-1 glass-card-sm px-3 py-1.5 text-xs text-white">
-            <span>Année en cours</span>
-            <ChevronDown size={12} />
+          <h1 className="text-lg font-bold text-white">Finances</h1>
+          <button className="card-sm flex items-center gap-1 px-2.5 py-1 text-[11px] text-white">
+            <span>Année en cours</span><ChevronDown size={12} />
           </button>
         </div>
 
-        {/* KPIs */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="glass-card-gold p-4">
-            <p className="text-[10px] text-gray-text uppercase tracking-wider mb-1.5">Investi</p>
-            <p className="text-base font-bold text-white">{formatFullAmount(getTotalInvested())}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
-          </div>
-          <div className="glass-card p-4">
-            <p className="text-[10px] text-gray-text uppercase tracking-wider mb-1.5">Revenus</p>
-            <p className="text-base font-bold text-white">{formatFullAmount(getTotalRevenues())}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
-          </div>
-          <div className="glass-card p-4">
-            <p className="text-[10px] text-gray-text uppercase tracking-wider mb-1.5">Bénéfices</p>
-            <p className="text-base font-bold text-success">{formatFullAmount(getTotalBenefits())}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
-          </div>
-          <div className="glass-card p-4">
-            <p className="text-[10px] text-gray-text uppercase tracking-wider mb-1.5">Dépenses</p>
-            <p className="text-base font-bold text-danger">{formatFullAmount(getTotalExpenses())}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
-          </div>
+        <div className="grid grid-cols-2 gap-2.5">
+          <div className="card"><p className="text-[10px] text-gray-text mb-1">Invest</p><p className="text-[13px] font-bold text-white">{formatFullAmount(getTotalInvested())}</p><p className="text-[9px] text-gray-text">FCFA</p></div>
+          <div className="card"><p className="text-[10px] text-gray-text mb-1">Revenus</p><p className="text-[13px] font-bold text-white">{formatFullAmount(getTotalRevenues())}</p><p className="text-[9px] text-gray-text">FCFA</p></div>
+          <div className="card"><p className="text-[10px] text-gray-text mb-1">Bénéfices</p><p className="text-[13px] font-bold text-success">{formatFullAmount(getTotalBenefits())}</p><p className="text-[9px] text-gray-text">FCFA</p></div>
+          <div className="card"><p className="text-[10px] text-gray-text mb-1">Dépenses</p><p className="text-[13px] font-bold text-danger">{formatFullAmount(getTotalExpenses())}</p><p className="text-[9px] text-gray-text">FCFA</p></div>
         </div>
 
-        {/* Chart */}
-        <div className="glass-card p-4">
-          <h3 className="text-sm font-bold text-white mb-4">Évolution Mensuelle</h3>
-          <div style={{ width: '100%', height: 200 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(31,41,55,0.3)" />
-                <XAxis dataKey="name" tick={{ fill: '#9CA3AF', fontSize: 9 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: '#9CA3AF', fontSize: 9 }} axisLine={false} tickLine={false} width={28} />
-                <Tooltip contentStyle={{ background: '#0D1526', border: '1px solid rgba(212,175,55,0.3)', borderRadius: 12, fontSize: 11, color: 'white' }} />
-                <Line type="monotone" dataKey="inv" stroke="#D4AF37" strokeWidth={2} dot={false} name="Investissements" />
-                <Line type="monotone" dataKey="rev" stroke="#0EA5FF" strokeWidth={2} dot={false} name="Revenus" />
-                <Line type="monotone" dataKey="ben" stroke="#22C55E" strokeWidth={2} dot={false} name="Bénéfices" />
-              </LineChart>
-            </ResponsiveContainer>
+        <div className="card">
+          <p className="text-[13px] font-bold text-white mb-3">Évolution Mensuelle</p>
+          <div style={{ width: '100%', height: 180 }}>
+            <ResponsiveContainer><LineChart data={monthly}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#1C2A3A" />
+              <XAxis dataKey="n" tick={{ fill: '#9CA3AF', fontSize: 9 }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: '#9CA3AF', fontSize: 9 }} axisLine={false} tickLine={false} width={28} />
+              <Tooltip contentStyle={tip} />
+              <Line type="monotone" dataKey="i" stroke="#D4AF37" strokeWidth={1.5} dot={false} name="Invest." />
+              <Line type="monotone" dataKey="r" stroke="#0EA5FF" strokeWidth={1.5} dot={false} name="Revenus" />
+              <Line type="monotone" dataKey="b" stroke="#22C55E" strokeWidth={1.5} dot={false} name="Bénéf." />
+            </LineChart></ResponsiveContainer>
           </div>
-          <div className="flex items-center justify-center gap-4 mt-3">
-            {[{ c: '#D4AF37', l: 'Invest.' }, { c: '#0EA5FF', l: 'Revenus' }, { c: '#22C55E', l: 'Bénéf.' }].map(i => (
-              <div key={i.l} className="flex items-center gap-1.5">
-                <div className="w-3 h-0.5 rounded" style={{ backgroundColor: i.c }} />
-                <span className="text-[10px] text-gray-text">{i.l}</span>
-              </div>
+          <div className="flex justify-center gap-4 mt-2">
+            {[{c:'#D4AF37',l:'Invest.'},{c:'#0EA5FF',l:'Revenus'},{c:'#22C55E',l:'Bénéf.'}].map(x=>(
+              <div key={x.l} className="flex items-center gap-1"><div className="w-2.5 h-0.5 rounded" style={{background:x.c}}/><span className="text-[9px] text-gray-text">{x.l}</span></div>
             ))}
           </div>
         </div>
 
-        {/* Donut */}
-        <div className="glass-card p-4">
-          <h3 className="text-sm font-bold text-white mb-4">Répartition des Dépenses</h3>
-          <div className="flex items-center gap-4">
-            <div style={{ width: 130, height: 130, flexShrink: 0 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie data={expenseBreakdown} cx="50%" cy="50%" innerRadius={36} outerRadius={58} paddingAngle={3} dataKey="value" stroke="none">
-                    {expenseBreakdown.map((entry, i) => <Cell key={i} fill={entry.color} />)}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
+        <div className="card">
+          <p className="text-[13px] font-bold text-white mb-3">Répartition des Dépenses</p>
+          <div className="flex items-center gap-3">
+            <div style={{ width: 120, height: 120, flexShrink: 0 }}>
+              <ResponsiveContainer><PieChart><Pie data={expenses} cx="50%" cy="50%" innerRadius={32} outerRadius={52} paddingAngle={2} dataKey="value" stroke="none">
+                {expenses.map((e, i) => <Cell key={i} fill={e.color} />)}
+              </Pie></PieChart></ResponsiveContainer>
             </div>
-            <div className="flex-1 space-y-2.5">
-              {expenseBreakdown.map(item => (
-                <div key={item.name} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-                    <span className="text-xs text-gray-text">{item.name}</span>
-                  </div>
-                  <span className="text-xs font-semibold text-white">{item.value}%</span>
+            <div className="flex-1 space-y-1.5">
+              {expenses.map(x => (
+                <div key={x.name} className="flex items-center justify-between">
+                  <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full" style={{background:x.color}}/><span className="text-[11px] text-gray-text">{x.name}</span></div>
+                  <span className="text-[11px] font-semibold text-white">{x.value}%</span>
                 </div>
               ))}
             </div>
