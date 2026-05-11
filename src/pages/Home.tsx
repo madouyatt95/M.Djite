@@ -1,6 +1,9 @@
-import { Bell, ChevronDown, Presentation, ChevronRight } from 'lucide-react';
+import { Bell, ChevronDown, Presentation, ChevronRight, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { projects, formatFullAmount, getTotalInvested, getTotalRevenues, getTotalBenefits } from '../data/projects';
+import { projects, getTotalInvested, getTotalRevenues, getTotalBenefits } from '../data/projects';
+import { usePrivacy } from '../context/PrivacyContext';
+import { motion, useAnimation } from 'framer-motion';
+import { useState } from 'react';
 
 const sectorData = [
   { name: 'Agriculture', value: 15, color: '#D4AF37' },
@@ -12,12 +15,36 @@ const sectorData = [
 ];
 
 export default function Home() {
+  const { isPrivate, togglePrivacy, formatAmount } = usePrivacy();
   const totalInvested = getTotalInvested();
   const totalRevenues = getTotalRevenues();
   const totalBenefits = getTotalBenefits();
+  
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const controls = useAnimation();
+
+  const handleDragEnd = async (e: any, info: any) => {
+    if (info.offset.y > 100) {
+      setIsRefreshing(true);
+      await controls.start({ y: 60, transition: { type: 'spring', bounce: 0 } });
+      setTimeout(async () => {
+        setIsRefreshing(false);
+        controls.start({ y: 0, transition: { type: 'spring', bounce: 0 } });
+      }, 1500);
+    } else {
+      controls.start({ y: 0, transition: { type: 'spring', bounce: 0 } });
+    }
+  };
 
   return (
-    <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
+    <motion.div drag="y" dragConstraints={{ top: 0, bottom: 0 }} dragElastic={0.2} onDragEnd={handleDragEnd} animate={controls} className="page-enter relative" style={{ background: '#05070B', minHeight: '100%' }}>
+      {isRefreshing && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-4 py-2 rounded-full shadow-lg" style={{ background: '#0C1422', border: '1px solid rgba(212,175,55,0.4)' }}>
+          <Loader2 size={18} className="text-gold animate-spin" />
+          <span className="text-xs font-bold text-white">Mise à jour...</span>
+        </div>
+      )}
+
       {/* Hero skyline */}
       <div className="relative">
         <div className="absolute inset-0 h-[340px]">
@@ -35,6 +62,9 @@ export default function Home() {
               <span className="text-gold font-bold text-xl">M.Djite</span>
             </div>
             <div className="flex items-center gap-4">
+              <button onClick={togglePrivacy} className="p-2 active:scale-95 transition-transform">
+                {isPrivate ? <EyeOff size={28} className="text-white" strokeWidth={2}/> : <Eye size={28} className="text-white" strokeWidth={2}/>}
+              </button>
               <button className="relative p-2">
                 <Bell size={28} className="text-white" strokeWidth={2} />
                 <span className="absolute top-1.5 right-2.5 w-3 h-3 bg-danger rounded-full border-2 border-dark" />
@@ -69,18 +99,18 @@ export default function Home() {
             <Presentation size={20} className="text-electric-blue" />
             <span className="text-gray-text text-sm font-medium">Total Investi</span>
           </div>
-          <p className="text-white font-bold text-4xl truncate">{formatFullAmount(totalInvested)} <span className="text-sm font-normal text-gray-text">FCFA</span></p>
+          <p className="text-white font-bold text-4xl truncate">{formatAmount(totalInvested)} <span className="text-sm font-normal text-gray-text">FCFA</span></p>
         </div>
 
         {/* Revenus / Bénéfices - GREEN BORDER CARDS */}
         <div className="grid grid-cols-2 gap-4 mb-5">
           <div className="rounded-[24px] p-5" style={{ background: '#05070B', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
             <p className="text-gray-text text-xs mb-2 font-medium">Revenus Totaux</p>
-            <p className="text-white font-bold text-[22px] truncate">{formatFullAmount(totalRevenues)} <span className="text-[10px] font-normal text-gray-text">FCFA</span></p>
+            <p className="text-white font-bold text-[22px] truncate">{formatAmount(totalRevenues)} <span className="text-[10px] font-normal text-gray-text">FCFA</span></p>
           </div>
           <div className="rounded-[24px] p-5" style={{ background: '#05070B', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
             <p className="text-gray-text text-xs mb-2 font-medium">Bénéfices Totaux</p>
-            <p className="text-white font-bold text-[22px] truncate">{formatFullAmount(totalBenefits)} <span className="text-[10px] font-normal text-gray-text">FCFA</span></p>
+            <p className="text-white font-bold text-[22px] truncate">{formatAmount(totalBenefits)} <span className="text-[10px] font-normal text-gray-text">FCFA</span></p>
           </div>
         </div>
 
@@ -134,6 +164,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

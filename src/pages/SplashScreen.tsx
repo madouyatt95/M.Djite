@@ -1,83 +1,44 @@
-import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ScanFace, CheckCircle2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function SplashScreen() {
-  const [show, setShow] = useState(false);
-  const [showText, setShowText] = useState(false);
-  const [showTagline, setShowTagline] = useState(false);
+  const [step, setStep] = useState<'scanning' | 'success'>('scanning');
 
   useEffect(() => {
-    setTimeout(() => setShow(true), 200);
-    setTimeout(() => setShowText(true), 800);
-    setTimeout(() => setShowTagline(true), 1400);
+    const t = setTimeout(() => setStep('success'), 2000);
+    return () => clearTimeout(t);
   }, []);
 
   return (
-    <div className="h-full w-full relative flex flex-col items-center justify-center overflow-hidden">
-      {/* Background image */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: 'url(/images/splash_bg.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'brightness(0.35)',
-        }}
-      />
+    <div className="flex flex-col items-center justify-center h-[100dvh] relative overflow-hidden" style={{ background: '#05070B' }}>
+      <div className="absolute inset-0" style={{ background: 'radial-gradient(circle at center, rgba(212,175,55,0.1) 0%, transparent 70%)' }} />
       
-      {/* Dark overlay gradient */}
-      <div className="absolute inset-0 z-1" style={{
-        background: 'linear-gradient(to bottom, rgba(5,7,11,0.6) 0%, rgba(5,7,11,0.3) 40%, rgba(5,7,11,0.7) 100%)',
-      }} />
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center gap-8">
-        {/* MD Logo */}
-        <div 
-          className={`transition-all duration-1000 ${show ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
-        >
-          <div className="w-40 h-40 rounded-3xl overflow-hidden" style={{
-            border: '2px solid rgba(212, 175, 55, 0.4)',
-            boxShadow: '0 0 60px rgba(212, 175, 55, 0.2)',
-          }}>
-            <img 
-              src="/images/md_logo.png" 
-              alt="M.Djité Logo" 
-              className="w-full h-full object-cover"
-            />
-          </div>
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="w-24 h-24 mb-10 rounded-[28px] overflow-hidden border border-gold/30 shadow-2xl shadow-gold/20">
+          <img src="/images/md_logo.png" alt="M.Djite" className="w-full h-full object-cover" />
         </div>
 
-        {/* App name */}
-        <div className={`transition-all duration-800 ${showText ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <h1 className="text-4xl font-bold tracking-widest text-gold-gradient">
-            M.DJITÉ
-          </h1>
+        <div className="h-32 flex flex-col items-center justify-center">
+          {step === 'scanning' ? (
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center">
+              <div className="relative">
+                <ScanFace size={64} className="text-gold opacity-80" strokeWidth={1} />
+                <motion.div 
+                  animate={{ y: [0, 64, 0] }} 
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  className="absolute top-0 left-0 w-full h-1 bg-gold shadow-[0_0_15px_rgba(212,175,55,0.8)] rounded-full" 
+                />
+              </div>
+              <p className="mt-6 text-gray-text font-medium tracking-wide">Authentification FaceID...</p>
+            </motion.div>
+          ) : (
+            <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center">
+              <CheckCircle2 size={64} className="text-success" />
+              <p className="mt-6 text-success font-bold tracking-wide">Accès Autorisé</p>
+            </motion.div>
+          )}
         </div>
-
-        {/* Tagline */}
-        <div className={`transition-all duration-800 ${showTagline ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <p className="text-sm tracking-[0.3em] text-gray-text font-light uppercase">
-            Investir. Développer. Impacter.
-          </p>
-        </div>
-      </div>
-
-      {/* Loading bar */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 w-32">
-        <div className="h-0.5 bg-white/10 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-gradient-to-r from-gold to-gold-light rounded-full"
-            style={{
-              animation: 'loadBar 3s ease-in-out forwards',
-            }}
-          />
-        </div>
-        <style>{`
-          @keyframes loadBar {
-            from { width: 0%; }
-            to { width: 100%; }
-          }
-        `}</style>
       </div>
     </div>
   );

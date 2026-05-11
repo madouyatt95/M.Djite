@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plus } from 'lucide-react';
-import { projects, formatFullAmount } from '../data/projects';
+import { projects } from '../data/projects';
+import { usePrivacy } from '../context/PrivacyContext';
 
 const filters = ['Tous', 'En cours', 'Actifs', 'Terminés'];
 const badgeMap: Record<string, { bg: string; text: string }> = {
@@ -12,6 +13,7 @@ const badgeMap: Record<string, { bg: string; text: string }> = {
 };
 
 export default function Projects() {
+  const { formatAmount } = usePrivacy();
   const nav = useNavigate();
   const [filter, setFilter] = useState('Tous');
   const [search, setSearch] = useState('');
@@ -89,7 +91,7 @@ export default function Projects() {
                 </div>
                 
                 <div className="text-right mt-auto">
-                  <p className="text-lg font-extrabold text-white">{formatFullAmount(p.investmentInitial)} <span className="text-[11px] text-gray-text font-normal">FCFA</span></p>
+                  <p className="text-lg font-extrabold text-white">{formatAmount(p.investmentInitial)} <span className="text-[11px] text-gray-text font-normal">FCFA</span></p>
                 </div>
               </div>
             </button>

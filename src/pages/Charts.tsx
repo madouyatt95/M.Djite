@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, BarChart, Bar, Cell } from 'recharts';
+import { projects } from '../data/projects';
 
 const tabs = ['Investissements', 'Revenus', 'Bénéfices'];
 const invData = [{name:'Jan',value:800},{name:'Fév',value:1200},{name:'Mar',value:950},{name:'Avr',value:1400},{name:'Mai',value:1100},{name:'Juin',value:1600},{name:'Juil',value:1350},{name:'Août',value:1800},{name:'Sep',value:1500},{name:'Oct',value:1700},{name:'Nov',value:1400},{name:'Déc',value:2000}];
@@ -14,12 +15,22 @@ const tip = {background:'#090E17',border:'1px solid #1C2A3A',borderRadius:16,fon
 
 export default function Charts() {
   const [tab, setTab] = useState('Investissements');
+  const [selectedProject, setSelectedProject] = useState('all');
+
   return (
     <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
       <div className="px-5 pt-14 pb-32 space-y-6">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-3xl font-bold text-white">Graphiques</h1>
-          <button className="px-4 py-2.5 rounded-xl text-sm font-medium text-white active:scale-95 transition-transform" style={{background:'#090E17', border: '1px solid #1C2A3A'}}>Année en cours</button>
+          <select 
+            value={selectedProject} 
+            onChange={e => setSelectedProject(e.target.value)}
+            className="px-4 py-2.5 rounded-xl text-sm font-medium text-white outline-none active:scale-95 transition-transform appearance-none" 
+            style={{background:'#090E17', border: '1px solid #1C2A3A'}}
+          >
+            <option value="all">Tous les projets</option>
+            {projects.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+          </select>
         </div>
         
         <div className="flex gap-3 mb-2">

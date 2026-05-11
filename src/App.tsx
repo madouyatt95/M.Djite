@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import { PrivacyProvider } from './context/PrivacyContext';
 import BottomNav from './components/BottomNav';
 import SplashScreen from './pages/SplashScreen';
 import Home from './pages/Home';
@@ -14,13 +16,44 @@ import Alerts from './pages/Alerts';
 import Settings from './pages/Settings';
 import AddProject from './pages/AddProject';
 
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial={{ x: 30, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: -30, opacity: 0 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        className="h-full w-full"
+      >
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:id" element={<ProjectDetail />} />
+          <Route path="/finances" element={<Finances />} />
+          <Route path="/charts" element={<Charts />} />
+          <Route path="/documents" element={<Documents />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/contacts/:id" element={<ContactDetail />} />
+          <Route path="/alerts" element={<Alerts />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/add-project" element={<AddProject />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 3500);
+    }, 2500); // 2.5s for FaceID
     return () => clearTimeout(timer);
   }, []);
 
@@ -29,27 +62,16 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="app-layout">
-        <div className="app-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:id" element={<ProjectDetail />} />
-            <Route path="/finances" element={<Finances />} />
-            <Route path="/charts" element={<Charts />} />
-            <Route path="/documents" element={<Documents />} />
-            <Route path="/contacts" element={<Contacts />} />
-            <Route path="/contacts/:id" element={<ContactDetail />} />
-            <Route path="/alerts" element={<Alerts />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/add-project" element={<AddProject />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+    <PrivacyProvider>
+      <Router>
+        <div className="app-layout">
+          <div className="app-content relative z-0 overflow-x-hidden">
+            <AnimatedRoutes />
+          </div>
+          <BottomNav />
         </div>
-        <BottomNav />
-      </div>
-    </Router>
+      </Router>
+    </PrivacyProvider>
   );
 }
 

@@ -1,7 +1,10 @@
-import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { ChevronDown, Download } from 'lucide-react';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import { formatFullAmount, getTotalInvested, getTotalRevenues, getTotalBenefits, getTotalExpenses } from '../data/projects';
+import { getTotalInvested, getTotalRevenues, getTotalBenefits, getTotalExpenses } from '../data/projects';
+import { usePrivacy } from '../context/PrivacyContext';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const monthly = [
   { n: 'Jan', i: 800, r: 400, b: 200 }, { n: 'Fév', i: 900, r: 500, b: 250 },
@@ -19,22 +22,45 @@ const expenses = [
 const tip = { background: '#090E17', border: '1px solid #1C2A3A', borderRadius: 16, fontSize: 14, color: '#fff', padding: 12 };
 
 export default function Finances() {
+  const { formatAmount } = usePrivacy();
   const [_] = useState('');
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const downloadPDF = async () => {
+    if (!contentRef.current) return;
+    setIsDownloading(true);
+    try {
+      const canvas = await html2canvas(contentRef.current, { scale: 2, backgroundColor: '#05070B' });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('Rapport_Financier_MDjite.pdf');
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
   return (
     <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
       <div className="px-5 pt-14 pb-32 space-y-6">
         <div className="flex items-center justify-between mb-2">
           <h1 className="text-3xl font-bold text-white">Finances</h1>
-          <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white active:scale-95 transition-transform" style={{background: '#090E17', border: '1px solid #1C2A3A'}}>
-            <span>Année en cours</span><ChevronDown size={16} className="text-gray-text" />
+          <button onClick={downloadPDF} disabled={isDownloading} className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold text-dark active:scale-95 transition-transform" style={{background: '#D4AF37', border: '1px solid #E8C84A'}}>
+            {isDownloading ? <span className="animate-pulse">Génération...</span> : <><Download size={18} /><span>Rapport PDF</span></>}
           </button>
         </div>
-
-        <div className="grid grid-cols-2 gap-4">
-          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Investissements</p><p className="text-2xl font-bold text-white truncate">{formatFullAmount(getTotalInvested())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
-          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Revenus</p><p className="text-2xl font-bold text-white truncate">{formatFullAmount(getTotalRevenues())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
-          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Bénéfices</p><p className="text-2xl font-bold text-success truncate">{formatFullAmount(getTotalBenefits())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
-          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Dépenses</p><p className="text-2xl font-bold text-danger truncate">{formatFullAmount(getTotalExpenses())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+        
+        <div ref={contentRef} className="space-y-6 pb-4">
+          <div className="grid grid-cols-2 gap-4">
+          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Investissements</p><p className="text-2xl font-bold text-white truncate">{formatAmount(getTotalInvested())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Revenus</p><p className="text-2xl font-bold text-white truncate">{formatAmount(getTotalRevenues())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Bénéfices</p><p className="text-2xl font-bold text-success truncate">{formatAmount(getTotalBenefits())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Dépenses</p><p className="text-2xl font-bold text-danger truncate">{formatAmount(getTotalExpenses())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
         </div>
 
         <div className="rounded-3xl p-6" style={{background: '#090E17', border: '1px solid #1C2A3A'}}>
@@ -74,6 +100,7 @@ export default function Finances() {
               ))}
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

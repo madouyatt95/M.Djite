@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, TrendingUp, TrendingDown, DollarSign, Receipt } from 'lucide-react';
-import { projects, formatFullAmount } from '../data/projects';
+import { projects } from '../data/projects';
+import { usePrivacy } from '../context/PrivacyContext';
 
 const badgeMap: Record<string, { bg: string; text: string }> = {
   'En cours': { bg: 'rgba(34, 197, 94, 0.15)', text: '#22C55E' }, 
@@ -10,6 +11,7 @@ const badgeMap: Record<string, { bg: string; text: string }> = {
 };
 
 export default function ProjectDetail() {
+  const { formatAmount } = usePrivacy();
   const { id } = useParams();
   const nav = useNavigate();
   const p = projects.find(x => x.id === id);
@@ -44,10 +46,10 @@ export default function ProjectDetail() {
         {/* KPIs */}
         <div className="grid grid-cols-2 gap-4">
           {[
-            { icon: DollarSign, label: 'Investi', value: formatFullAmount(p.investmentInitial), color: 'text-white', ic: 'text-gold' },
-            { icon: Receipt, label: 'Dépenses', value: formatFullAmount(p.expenses), color: 'text-white', ic: 'text-danger' },
-            { icon: TrendingUp, label: 'Revenus', value: formatFullAmount(p.revenues), color: 'text-white', ic: 'text-success' },
-            { icon: p.benefitNet >= 0 ? TrendingUp : TrendingDown, label: 'Bénéfice Net', value: `${p.benefitNet >= 0 ? '+' : ''}${formatFullAmount(p.benefitNet)}`, color: p.benefitNet >= 0 ? 'text-success' : 'text-danger', ic: p.benefitNet >= 0 ? 'text-success' : 'text-danger' },
+            { icon: DollarSign, label: 'Investi', value: formatAmount(p.investmentInitial), color: 'text-white', ic: 'text-gold' },
+            { icon: Receipt, label: 'Dépenses', value: formatAmount(p.expenses), color: 'text-white', ic: 'text-danger' },
+            { icon: TrendingUp, label: 'Revenus', value: formatAmount(p.revenues), color: 'text-white', ic: 'text-success' },
+            { icon: p.benefitNet >= 0 ? TrendingUp : TrendingDown, label: 'Bénéfice Net', value: `${p.benefitNet >= 0 ? '+' : ''}${formatAmount(p.benefitNet)}`, color: p.benefitNet >= 0 ? 'text-success' : 'text-danger', ic: p.benefitNet >= 0 ? 'text-success' : 'text-danger' },
           ].map((k, i) => { const Icon = k.icon; return (
             <div key={i} className="rounded-3xl p-5" style={{background:'#090E17', border:'1px solid #1C2A3A'}}>
               <div className="flex items-center gap-2.5 mb-2.5">
