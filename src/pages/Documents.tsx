@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, FileText, FileSpreadsheet, File } from 'lucide-react';
+import { Search, FileText, FileSpreadsheet, File, Plus } from 'lucide-react';
 import { documents, documentFilters } from '../data/documents';
 
 const icons: Record<string,{icon:typeof FileText,color:string}> = {
@@ -14,7 +14,12 @@ export default function Documents() {
   return (
     <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
       <div className="px-5 pt-14">
-        <h1 className="text-3xl font-bold text-white mb-8">Documents</h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold text-white">Documents</h1>
+          <button onClick={() => alert('Fonctionnalité en cours de développement')} className="w-12 h-12 rounded-full bg-gold flex items-center justify-center shadow-lg shadow-gold/20 active:scale-95 transition-transform">
+            <Plus size={28} className="text-white" strokeWidth={2.5} />
+          </button>
+        </div>
         
         <div className="relative mb-6">
           <Search size={22} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-text"/>

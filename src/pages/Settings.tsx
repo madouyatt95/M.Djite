@@ -37,7 +37,7 @@ export default function Settings() {
           {items.map((item, i) => {
             const Icon = item.i;
             return (
-              <button key={item.l} className="w-full rounded-2xl p-4 flex items-center gap-4 text-left active:scale-[0.98] transition-transform" style={{background:'#090E17', border: '1px solid #1C2A3A', animationDelay:`${i*40}ms`,animation:'fadeInUp 0.3s ease-out forwards',opacity:0}}>
+              <button key={item.l} onClick={() => alert(`${item.l} : Fonctionnalité en cours de développement`)} className="w-full rounded-2xl p-4 flex items-center gap-4 text-left active:scale-[0.98] transition-transform" style={{background:'#090E17', border: '1px solid #1C2A3A', animationDelay:`${i*40}ms`,animation:'fadeInUp 0.3s ease-out forwards',opacity:0}}>
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{background:`${item.c}15`}}><Icon size={22} style={{color:item.c}}/></div>
                 <div className="flex-1 min-w-0">
                   <p className="text-base font-bold text-white">{item.l}</p>
@@ -51,7 +51,7 @@ export default function Settings() {
           })}
         </div>
         
-        <button className="w-full py-4 rounded-2xl text-center text-danger font-bold text-base mt-4 active:scale-[0.98] transition-transform" style={{background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)'}}>
+        <button onClick={() => alert('Déconnexion réussie (Simulation)')} className="w-full py-4 rounded-2xl text-center text-danger font-bold text-base mt-4 active:scale-[0.98] transition-transform" style={{background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)'}}>
           Se déconnecter
         </button>
       </div>

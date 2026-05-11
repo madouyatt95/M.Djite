@@ -62,9 +62,9 @@ export default function Home() {
       </div>
 
       {/* Cards */}
-      <div className="relative z-20 px-5 pb-32 space-y-4 -mt-4">
+      <div className="relative z-20 px-5 pb-32 -mt-2">
         {/* Total Investi - BLUE CARD */}
-        <div className="rounded-3xl p-6 shadow-xl" style={{ background: 'linear-gradient(180deg, rgba(14, 165, 255, 0.15) 0%, rgba(5, 7, 11, 0.95) 100%)', border: '1px solid rgba(14, 165, 255, 0.4)' }}>
+        <div className="rounded-[24px] p-6 shadow-xl mb-5" style={{ background: 'linear-gradient(180deg, rgba(14, 165, 255, 0.15) 0%, rgba(5, 7, 11, 0.95) 100%)', border: '1px solid rgba(14, 165, 255, 0.4)' }}>
           <div className="flex items-center gap-2 mb-3">
             <Presentation size={20} className="text-electric-blue" />
             <span className="text-gray-text text-sm font-medium">Total Investi</span>
@@ -73,19 +73,19 @@ export default function Home() {
         </div>
 
         {/* Revenus / Bénéfices - GREEN BORDER CARDS */}
-        <div className="grid grid-cols-2 gap-4">
-          <div className="rounded-3xl p-5" style={{ background: '#05070B', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
+        <div className="grid grid-cols-2 gap-4 mb-5">
+          <div className="rounded-[24px] p-5" style={{ background: '#05070B', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
             <p className="text-gray-text text-xs mb-2 font-medium">Revenus Totaux</p>
-            <p className="text-white font-bold text-xl truncate">{formatFullAmount(totalRevenues)} <span className="text-[10px] font-normal text-gray-text">FCFA</span></p>
+            <p className="text-white font-bold text-[22px] truncate">{formatFullAmount(totalRevenues)} <span className="text-[10px] font-normal text-gray-text">FCFA</span></p>
           </div>
-          <div className="rounded-3xl p-5" style={{ background: '#05070B', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
+          <div className="rounded-[24px] p-5" style={{ background: '#05070B', border: '1px solid rgba(34, 197, 94, 0.3)' }}>
             <p className="text-gray-text text-xs mb-2 font-medium">Bénéfices Totaux</p>
-            <p className="text-white font-bold text-xl truncate">{formatFullAmount(totalBenefits)} <span className="text-[10px] font-normal text-gray-text">FCFA</span></p>
+            <p className="text-white font-bold text-[22px] truncate">{formatFullAmount(totalBenefits)} <span className="text-[10px] font-normal text-gray-text">FCFA</span></p>
           </div>
         </div>
 
         {/* Projets */}
-        <div className="pt-4">
+        <div className="pt-2 mb-6">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-white font-bold text-xl">Projets</h2>
             <button className="flex items-center text-gold text-base font-semibold active:opacity-70">
@@ -100,7 +100,7 @@ export default function Home() {
               { v: '2', l: 'Suspendus', c: 'text-danger' },
             ].map(s => (
               <div key={s.l} className="rounded-2xl p-4 text-center flex flex-col justify-center items-center" style={{ background: '#05070B', border: '1px solid #1C2A3A' }}>
-                <p className={`text-3xl font-bold ${s.c} leading-tight`}>{s.v}</p>
+                <p className={`text-[26px] font-bold ${s.c} leading-tight`}>{s.v}</p>
                 <p className="text-[10px] text-gray-text mt-2 font-medium">{s.l}</p>
               </div>
             ))}
@@ -108,7 +108,7 @@ export default function Home() {
         </div>
 
         {/* Répartition par Secteur */}
-        <div className="pt-5">
+        <div className="pt-2">
           <h2 className="text-white font-bold text-xl mb-6">Répartition par Secteur</h2>
           <div className="flex items-center gap-6">
             <div style={{ width: 160, height: 160, flexShrink: 0 }}>
