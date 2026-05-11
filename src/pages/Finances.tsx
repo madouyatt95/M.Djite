@@ -16,60 +16,60 @@ const expenses = [
   { name: 'Fonctionnement', value: 15, color: '#8B5CF6' }, { name: 'Marketing', value: 10, color: '#22C55E' },
   { name: 'Divers', value: 10, color: '#F59E0B' },
 ];
-const tip = { background: '#0C1422', border: '1px solid #1C2A3A', borderRadius: 10, fontSize: 10, color: '#fff' };
+const tip = { background: '#090E17', border: '1px solid #1C2A3A', borderRadius: 16, fontSize: 14, color: '#fff', padding: 12 };
 
 export default function Finances() {
   const [_] = useState('');
   return (
-    <div className="page-enter">
-      <div className="px-4 pt-12 pb-6 space-y-3">
-        <div className="flex items-center justify-between">
-          <h1 className="text-lg font-bold text-white">Finances</h1>
-          <button className="card-sm flex items-center gap-1 px-2.5 py-1 text-[11px] text-white">
-            <span>Année en cours</span><ChevronDown size={12} />
+    <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
+      <div className="px-5 pt-14 pb-32 space-y-6">
+        <div className="flex items-center justify-between mb-2">
+          <h1 className="text-3xl font-bold text-white">Finances</h1>
+          <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium text-white active:scale-95 transition-transform" style={{background: '#090E17', border: '1px solid #1C2A3A'}}>
+            <span>Année en cours</span><ChevronDown size={16} className="text-gray-text" />
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-2.5">
-          <div className="card"><p className="text-[10px] text-gray-text mb-1">Invest</p><p className="text-[13px] font-bold text-white">{formatFullAmount(getTotalInvested())}</p><p className="text-[9px] text-gray-text">FCFA</p></div>
-          <div className="card"><p className="text-[10px] text-gray-text mb-1">Revenus</p><p className="text-[13px] font-bold text-white">{formatFullAmount(getTotalRevenues())}</p><p className="text-[9px] text-gray-text">FCFA</p></div>
-          <div className="card"><p className="text-[10px] text-gray-text mb-1">Bénéfices</p><p className="text-[13px] font-bold text-success">{formatFullAmount(getTotalBenefits())}</p><p className="text-[9px] text-gray-text">FCFA</p></div>
-          <div className="card"><p className="text-[10px] text-gray-text mb-1">Dépenses</p><p className="text-[13px] font-bold text-danger">{formatFullAmount(getTotalExpenses())}</p><p className="text-[9px] text-gray-text">FCFA</p></div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Investissements</p><p className="text-2xl font-bold text-white truncate">{formatFullAmount(getTotalInvested())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Revenus</p><p className="text-2xl font-bold text-white truncate">{formatFullAmount(getTotalRevenues())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Bénéfices</p><p className="text-2xl font-bold text-success truncate">{formatFullAmount(getTotalBenefits())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Dépenses</p><p className="text-2xl font-bold text-danger truncate">{formatFullAmount(getTotalExpenses())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
         </div>
 
-        <div className="card">
-          <p className="text-[13px] font-bold text-white mb-3">Évolution Mensuelle</p>
-          <div style={{ width: '100%', height: 180 }}>
+        <div className="rounded-3xl p-6" style={{background: '#090E17', border: '1px solid #1C2A3A'}}>
+          <p className="text-xl font-bold text-white mb-6">Évolution Mensuelle</p>
+          <div style={{ width: '100%', height: 240 }}>
             <ResponsiveContainer><LineChart data={monthly}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1C2A3A" />
-              <XAxis dataKey="n" tick={{ fill: '#9CA3AF', fontSize: 9 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: '#9CA3AF', fontSize: 9 }} axisLine={false} tickLine={false} width={28} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#1C2A3A" vertical={false} />
+              <XAxis dataKey="n" tick={{ fill: '#9CA3AF', fontSize: 12 }} axisLine={false} tickLine={false} dy={10} />
+              <YAxis tick={{ fill: '#9CA3AF', fontSize: 12 }} axisLine={false} tickLine={false} width={35} />
               <Tooltip contentStyle={tip} />
-              <Line type="monotone" dataKey="i" stroke="#D4AF37" strokeWidth={1.5} dot={false} name="Invest." />
-              <Line type="monotone" dataKey="r" stroke="#0EA5FF" strokeWidth={1.5} dot={false} name="Revenus" />
-              <Line type="monotone" dataKey="b" stroke="#22C55E" strokeWidth={1.5} dot={false} name="Bénéf." />
+              <Line type="monotone" dataKey="i" stroke="#D4AF37" strokeWidth={3} dot={false} name="Invest." />
+              <Line type="monotone" dataKey="r" stroke="#0EA5FF" strokeWidth={3} dot={false} name="Revenus" />
+              <Line type="monotone" dataKey="b" stroke="#22C55E" strokeWidth={3} dot={false} name="Bénéf." />
             </LineChart></ResponsiveContainer>
           </div>
-          <div className="flex justify-center gap-4 mt-2">
+          <div className="flex justify-center flex-wrap gap-5 mt-6">
             {[{c:'#D4AF37',l:'Invest.'},{c:'#0EA5FF',l:'Revenus'},{c:'#22C55E',l:'Bénéf.'}].map(x=>(
-              <div key={x.l} className="flex items-center gap-1"><div className="w-2.5 h-0.5 rounded" style={{background:x.c}}/><span className="text-[9px] text-gray-text">{x.l}</span></div>
+              <div key={x.l} className="flex items-center gap-2"><div className="w-4 h-1 rounded-full" style={{background:x.c}}/><span className="text-sm font-medium text-gray-text">{x.l}</span></div>
             ))}
           </div>
         </div>
 
-        <div className="card">
-          <p className="text-[13px] font-bold text-white mb-3">Répartition des Dépenses</p>
-          <div className="flex items-center gap-3">
-            <div style={{ width: 120, height: 120, flexShrink: 0 }}>
-              <ResponsiveContainer><PieChart><Pie data={expenses} cx="50%" cy="50%" innerRadius={32} outerRadius={52} paddingAngle={2} dataKey="value" stroke="none">
+        <div className="rounded-3xl p-6" style={{background: '#090E17', border: '1px solid #1C2A3A'}}>
+          <p className="text-xl font-bold text-white mb-6">Répartition des Dépenses</p>
+          <div className="flex items-center gap-6">
+            <div style={{ width: 150, height: 150, flexShrink: 0 }}>
+              <ResponsiveContainer><PieChart><Pie data={expenses} cx="50%" cy="50%" innerRadius={45} outerRadius={70} paddingAngle={3} dataKey="value" stroke="none">
                 {expenses.map((e, i) => <Cell key={i} fill={e.color} />)}
               </Pie></PieChart></ResponsiveContainer>
             </div>
-            <div className="flex-1 space-y-1.5">
+            <div className="flex-1 space-y-3">
               {expenses.map(x => (
                 <div key={x.name} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full" style={{background:x.color}}/><span className="text-[11px] text-gray-text">{x.name}</span></div>
-                  <span className="text-[11px] font-semibold text-white">{x.value}%</span>
+                  <div className="flex items-center gap-3"><div className="w-3.5 h-3.5 rounded-full shadow-sm" style={{background:x.color}}/><span className="text-sm font-medium text-gray-text">{x.name}</span></div>
+                  <span className="text-sm font-semibold text-white">{x.value}%</span>
                 </div>
               ))}
             </div>

@@ -62,7 +62,7 @@ export default function Home() {
       </div>
 
       {/* Cards */}
-      <div className="px-5 pb-32 space-y-4 -mt-4">
+      <div className="relative z-20 px-5 pb-32 space-y-4 -mt-4">
         {/* Total Investi - BLUE CARD */}
         <div className="rounded-3xl p-6 shadow-xl" style={{ background: 'linear-gradient(180deg, rgba(14, 165, 255, 0.15) 0%, rgba(5, 7, 11, 0.95) 100%)', border: '1px solid rgba(14, 165, 255, 0.4)' }}>
           <div className="flex items-center gap-2 mb-3">

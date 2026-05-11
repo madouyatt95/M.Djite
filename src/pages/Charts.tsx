@@ -10,44 +10,47 @@ const barData = [{name:'Agri',value:1250,color:'#D4AF37'},{name:'Loisirs',value:
 const dMap: Record<string,any[]> = {'Investissements':invData,'Revenus':revData,'Bénéfices':benData};
 const cMap: Record<string,string> = {'Investissements':'#D4AF37','Revenus':'#0EA5FF','Bénéfices':'#22C55E'};
 const tMap: Record<string,string> = {'Investissements':'Évolution des Investissements','Revenus':'Évolution des Revenus','Bénéfices':'Évolution des Bénéfices'};
-const tip = {background:'#0C1422',border:'1px solid #1C2A3A',borderRadius:10,fontSize:10,color:'#fff'};
+const tip = {background:'#090E17',border:'1px solid #1C2A3A',borderRadius:16,fontSize:14,color:'#fff',padding:12};
 
 export default function Charts() {
   const [tab, setTab] = useState('Investissements');
   return (
-    <div className="page-enter">
-      <div className="px-4 pt-12 pb-6 space-y-3">
-        <div className="flex items-center justify-between">
-          <h1 className="text-lg font-bold text-white">Graphiques</h1>
-          <button className="card-sm px-2.5 py-1 text-[11px] text-white">Année en cours</button>
+    <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
+      <div className="px-5 pt-14 pb-32 space-y-6">
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-3xl font-bold text-white">Graphiques</h1>
+          <button className="px-4 py-2.5 rounded-xl text-sm font-medium text-white active:scale-95 transition-transform" style={{background:'#090E17', border: '1px solid #1C2A3A'}}>Année en cours</button>
         </div>
-        <div className="flex gap-2">
+        
+        <div className="flex gap-3 mb-2">
           {tabs.map(t=>(
-            <button key={t} onClick={()=>setTab(t)} className={`flex-1 py-2 rounded-xl text-[11px] font-semibold ${tab===t?'bg-gold text-dark':'text-gray-text'}`}
-              style={tab!==t?{background:'#0C1422',border:'1px solid #1C2A3A'}:{}}>{t}</button>
+            <button key={t} onClick={()=>setTab(t)} className={`flex-1 py-3.5 rounded-2xl text-sm font-bold transition-colors ${tab===t?'bg-gold text-dark shadow-lg shadow-gold/20':'text-gray-text hover:text-white'}`}
+              style={tab!==t?{background:'#090E17',border:'1px solid #1C2A3A'}:{}}>{t}</button>
           ))}
         </div>
-        <div className="card">
-          <p className="text-[13px] font-bold text-white mb-3">{tMap[tab]}</p>
-          <div style={{width:'100%',height:180}}>
+        
+        <div className="rounded-3xl p-6" style={{background:'#090E17', border: '1px solid #1C2A3A'}}>
+          <p className="text-xl font-bold text-white mb-6">{tMap[tab]}</p>
+          <div style={{width:'100%',height:240}}>
             <ResponsiveContainer><LineChart data={dMap[tab]}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1C2A3A"/>
-              <XAxis dataKey="name" tick={{fill:'#9CA3AF',fontSize:9}} axisLine={false} tickLine={false}/>
-              <YAxis tick={{fill:'#9CA3AF',fontSize:9}} axisLine={false} tickLine={false} width={28}/>
+              <CartesianGrid strokeDasharray="3 3" stroke="#1C2A3A" vertical={false}/>
+              <XAxis dataKey="name" tick={{fill:'#9CA3AF',fontSize:12}} axisLine={false} tickLine={false} dy={10}/>
+              <YAxis tick={{fill:'#9CA3AF',fontSize:12}} axisLine={false} tickLine={false} width={35}/>
               <Tooltip contentStyle={tip}/>
-              <Line type="monotone" dataKey="value" stroke={cMap[tab]} strokeWidth={2} dot={{r:2.5,fill:cMap[tab]}}/>
+              <Line type="monotone" dataKey="value" stroke={cMap[tab]} strokeWidth={3} dot={{r:4,fill:cMap[tab]}}/>
             </LineChart></ResponsiveContainer>
           </div>
         </div>
-        <div className="card">
-          <p className="text-[13px] font-bold text-white mb-3">Par secteur (M FCFA)</p>
-          <div style={{width:'100%',height:180}}>
-            <ResponsiveContainer><BarChart data={barData} barCategoryGap="20%">
+        
+        <div className="rounded-3xl p-6" style={{background:'#090E17', border: '1px solid #1C2A3A'}}>
+          <p className="text-xl font-bold text-white mb-6">Par secteur (M FCFA)</p>
+          <div style={{width:'100%',height:240}}>
+            <ResponsiveContainer><BarChart data={barData} barCategoryGap="25%">
               <CartesianGrid strokeDasharray="3 3" stroke="#1C2A3A" vertical={false}/>
-              <XAxis dataKey="name" tick={{fill:'#9CA3AF',fontSize:9}} axisLine={false} tickLine={false}/>
-              <YAxis tick={{fill:'#9CA3AF',fontSize:9}} axisLine={false} tickLine={false} width={28}/>
+              <XAxis dataKey="name" tick={{fill:'#9CA3AF',fontSize:12}} axisLine={false} tickLine={false} dy={10}/>
+              <YAxis tick={{fill:'#9CA3AF',fontSize:12}} axisLine={false} tickLine={false} width={35}/>
               <Tooltip contentStyle={tip}/>
-              <Bar dataKey="value" radius={[4,4,0,0]}>{barData.map((e,i)=><Cell key={i} fill={e.color}/>)}</Bar>
+              <Bar dataKey="value" radius={[6,6,0,0]}>{barData.map((e,i)=><Cell key={i} fill={e.color}/>)}</Bar>
             </BarChart></ResponsiveContainer>
           </div>
         </div>

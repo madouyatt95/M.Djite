@@ -12,34 +12,48 @@ export default function Documents() {
   const list = documents.filter(d => (filter==='Tous'||d.category===filter) && d.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <div className="page-enter">
-      <div className="px-4 pt-12">
-        <h1 className="text-lg font-bold text-white mb-4">Documents</h1>
-        <div className="relative mb-3">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-text"/>
-          <input type="text" placeholder="Rechercher un document..." value={search} onChange={e=>setSearch(e.target.value)} className="input pl-9"/>
+    <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
+      <div className="px-5 pt-14">
+        <h1 className="text-3xl font-bold text-white mb-8">Documents</h1>
+        
+        <div className="relative mb-6">
+          <Search size={22} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-text"/>
+          <input type="text" placeholder="Rechercher un document..." value={search} onChange={e=>setSearch(e.target.value)} 
+            className="w-full pl-12 pr-4 py-4 rounded-2xl text-base text-white placeholder:text-gray-text outline-none focus:border-gold/50 transition-colors"
+            style={{background:'#090E17', border:'1.5px solid #1C2A3A'}}/>
         </div>
-        <div className="flex gap-2 mb-4 overflow-x-auto no-scrollbar">
-          {documentFilters.map(f=>(
-            <button key={f} onClick={()=>setFilter(f)} className={`px-3.5 py-1.5 rounded-full text-[11px] font-semibold whitespace-nowrap ${filter===f?'bg-gold text-dark':'text-gray-text'}`}
-              style={filter!==f?{background:'#0C1422',border:'1px solid #1C2A3A'}:{}}>{f}</button>
-          ))}
+        
+        <div className="flex gap-8 mb-6 overflow-x-auto no-scrollbar border-b border-white/10">
+          {documentFilters.map(f=>{
+            const active = filter===f;
+            return (
+            <button key={f} onClick={()=>setFilter(f)} 
+              className={`pb-4 text-base font-medium whitespace-nowrap relative transition-colors ${active?'text-white':'text-gray-text hover:text-white'}`}>
+              {f}
+              {active && <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold rounded-t-full" />}
+            </button>
+            )
+          })}
         </div>
       </div>
-      <div className="px-4 pb-6 space-y-2.5">
+      
+      <div className="px-5 pb-32 space-y-4">
         {list.map((doc,i) => {
           const t=icons[doc.type]; const Icon=t.icon;
           return (
-            <div key={doc.id} className="card flex items-center gap-3" style={{padding:12,animationDelay:`${i*50}ms`,animation:'fadeInUp 0.35s ease-out forwards',opacity:0}}>
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style={{background:`${t.color}12`,border:`1px solid ${t.color}25`}}>
-                <Icon size={18} style={{color:t.color}}/>
+            <div key={doc.id} className="rounded-[24px] p-4 flex items-center gap-4 active:scale-[0.98] transition-transform" 
+              style={{background:'#090E17',border:'1px solid #1C2A3A',animationDelay:`${i*40}ms`,animation:'fadeInUp 0.3s ease-out forwards',opacity:0}}>
+              
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style={{background:`${t.color}15`,border:`1px solid ${t.color}30`}}>
+                <Icon size={24} style={{color:t.color}}/>
               </div>
+              
               <div className="flex-1 min-w-0">
-                <p className="text-[12px] font-semibold text-white truncate mb-0.5">{doc.name}</p>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[9px] px-1.5 py-0.5 rounded font-medium" style={{background:`${t.color}12`,color:t.color}}>{doc.type}</span>
-                  <span className="text-[9px] text-gray-text">{doc.size}</span>
-                  <span className="text-[9px] text-gray-text">{doc.date}</span>
+                <p className="text-base font-bold text-white truncate mb-1">{doc.name}</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs px-2 py-1 rounded-md font-bold" style={{background:`${t.color}15`,color:t.color}}>{doc.type}</span>
+                  <span className="text-xs font-medium text-gray-text">{doc.size}</span>
+                  <span className="text-xs font-medium text-gray-text">{doc.date}</span>
                 </div>
               </div>
             </div>

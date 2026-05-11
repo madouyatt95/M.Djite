@@ -2,38 +2,44 @@ import { useState } from 'react';
 import { alerts, alertFilters } from '../data/alerts';
 
 const colorMap: Record<string,{bg:string,border:string,icon:string}> = {
-  danger: {bg:'#EF44440A',border:'#EF444430',icon:'#EF444415'},
-  warning: {bg:'#F59E0B0A',border:'#F59E0B30',icon:'#F59E0B15'},
-  error: {bg:'#EF44440A',border:'#EF444430',icon:'#EF444415'},
-  info: {bg:'#0EA5FF0A',border:'#0EA5FF30',icon:'#0EA5FF15'},
-  success: {bg:'#22C55E0A',border:'#22C55E30',icon:'#22C55E15'},
+  danger: {bg:'#EF44440F',border:'#EF444440',icon:'#EF444420'},
+  warning: {bg:'#F59E0B0F',border:'#F59E0B40',icon:'#F59E0B20'},
+  error: {bg:'#EF44440F',border:'#EF444440',icon:'#EF444420'},
+  info: {bg:'#0EA5FF0F',border:'#0EA5FF40',icon:'#0EA5FF20'},
+  success: {bg:'#22C55E0F',border:'#22C55E40',icon:'#22C55E20'},
 };
 
 export default function Alerts() {
   const [filter, setFilter] = useState('Toutes');
   return (
-    <div className="page-enter">
-      <div className="px-4 pt-12 pb-2">
-        <h1 className="text-lg font-bold text-white mb-4">Alertes</h1>
-        <div className="flex gap-2 mb-4 overflow-x-auto no-scrollbar">
-          {alertFilters.map(f=>(
-            <button key={f} onClick={()=>setFilter(f)} className={`px-3.5 py-1.5 rounded-full text-[11px] font-semibold whitespace-nowrap ${filter===f?'bg-gold text-dark':'text-gray-text'}`}
-              style={filter!==f?{background:'#0C1422',border:'1px solid #1C2A3A'}:{}}>{f}</button>
-          ))}
+    <div className="page-enter" style={{ background: '#05070B', minHeight: '100%' }}>
+      <div className="px-5 pt-14 pb-4">
+        <h1 className="text-3xl font-bold text-white mb-8">Alertes</h1>
+        <div className="flex gap-8 overflow-x-auto no-scrollbar border-b border-white/10">
+          {alertFilters.map(f=>{
+            const active = filter===f;
+            return (
+              <button key={f} onClick={()=>setFilter(f)} 
+                className={`pb-4 text-base font-medium whitespace-nowrap relative transition-colors ${active?'text-white':'text-gray-text hover:text-white'}`}>
+                {f}
+                {active && <div className="absolute bottom-0 left-0 right-0 h-1 bg-gold rounded-t-full" />}
+              </button>
+            )
+          })}
         </div>
       </div>
-      <div className="px-4 pb-6 space-y-2.5">
+      <div className="px-5 pb-32 space-y-4 pt-2">
         {alerts.map((a,i) => {
           const c = colorMap[a.type] || colorMap.info;
           return (
-            <div key={a.id} className="p-3.5 rounded-xl flex items-start gap-3" style={{background:c.bg,border:`1px solid ${c.border}`,animationDelay:`${i*50}ms`,animation:'fadeInUp 0.35s ease-out forwards',opacity:0}}>
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 text-sm" style={{background:c.icon}}>{a.icon}</div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-2 mb-0.5">
-                  <h3 className="text-[13px] font-semibold text-white">{a.title}</h3>
-                  <span className="text-[9px] text-gray-text whitespace-nowrap">{a.time}</span>
+            <div key={a.id} className="p-5 rounded-[24px] flex items-start gap-4" style={{background:c.bg,border:`1px solid ${c.border}`,animationDelay:`${i*40}ms`,animation:'fadeInUp 0.3s ease-out forwards',opacity:0}}>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 text-xl" style={{background:c.icon}}>{a.icon}</div>
+              <div className="flex-1 min-w-0 py-0.5">
+                <div className="flex items-start justify-between gap-3 mb-1.5">
+                  <h3 className="text-base font-bold text-white leading-tight">{a.title}</h3>
+                  <span className="text-xs font-medium text-gray-text whitespace-nowrap mt-0.5">{a.time}</span>
                 </div>
-                <p className="text-[11px] text-gray-text leading-relaxed">{a.description}</p>
+                <p className="text-sm font-medium text-gray-text leading-relaxed">{a.description}</p>
               </div>
             </div>
           );
