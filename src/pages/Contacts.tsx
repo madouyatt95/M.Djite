@@ -19,7 +19,7 @@ export default function Contacts() {
         <div className="relative mb-6">
           <Search size={22} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-text"/>
           <input type="text" placeholder="Rechercher un contact..." value={search} onChange={e=>setSearch(e.target.value)} 
-            className="w-full pl-12 pr-4 py-4 rounded-2xl text-base text-white placeholder:text-gray-text outline-none focus:border-gold/50 transition-colors"
+            className="w-full pl-14 pr-4 py-4 rounded-2xl text-base text-white placeholder:text-gray-text outline-none focus:border-gold/50 transition-colors"
             style={{background:'#090E17', border:'1.5px solid #1C2A3A'}}/>
         </div>
         

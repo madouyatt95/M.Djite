@@ -60,9 +60,9 @@ export default function Finances() {
           <div className="rounded-[24px] p-6 shadow-2xl relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #090E17 0%, #05070B 100%)', border: '1px solid rgba(212,175,55,0.4)' }}>
             <div className="absolute top-0 right-0 w-32 h-32 bg-gold/10 rounded-full blur-3xl" />
             <p className="text-sm font-medium text-gold mb-2 uppercase tracking-widest">Valeur Nette (Net Worth)</p>
-            <div className="flex items-end gap-2 mb-4">
-              <p className="text-[40px] font-bold text-white leading-none">{formatAmount(getTotalInvested() - 450000000)}</p>
-              <p className="text-sm font-medium text-gray-text mb-1">FCFA</p>
+            <div className="flex items-end gap-2 mb-4 w-full">
+              <p className="text-3xl md:text-4xl font-bold text-white leading-none truncate">{formatAmount(getTotalInvested() - 450000000)}</p>
+              <p className="text-sm font-medium text-gray-text mb-1 flex-shrink-0">FCFA</p>
             </div>
             <div className="flex items-center gap-6">
               <div>
@@ -78,10 +78,10 @@ export default function Finances() {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Investissements</p><p className="text-2xl font-bold text-white truncate">{formatAmount(getTotalInvested())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
-          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Revenus</p><p className="text-2xl font-bold text-white truncate">{formatAmount(getTotalRevenues())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
-          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Bénéfices</p><p className="text-2xl font-bold text-success truncate">{formatAmount(getTotalBenefits())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
-          <div className="rounded-3xl p-5" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-sm text-gray-text mb-2 font-medium">Dépenses</p><p className="text-2xl font-bold text-danger truncate">{formatAmount(getTotalExpenses())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5 min-w-0" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-xs md:text-sm text-gray-text mb-2 font-medium truncate">Investissements</p><p className="text-xl font-bold text-white truncate">{formatAmount(getTotalInvested())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5 min-w-0" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-xs md:text-sm text-gray-text mb-2 font-medium truncate">Revenus</p><p className="text-xl font-bold text-white truncate">{formatAmount(getTotalRevenues())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5 min-w-0" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-xs md:text-sm text-gray-text mb-2 font-medium truncate">Bénéfices</p><p className="text-xl font-bold text-success truncate">{formatAmount(getTotalBenefits())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
+          <div className="rounded-3xl p-5 min-w-0" style={{background: '#090E17', border: '1px solid #1C2A3A'}}><p className="text-xs md:text-sm text-gray-text mb-2 font-medium truncate">Dépenses</p><p className="text-xl font-bold text-danger truncate">{formatAmount(getTotalExpenses())}</p><p className="text-xs text-gray-text mt-1">FCFA</p></div>
         </div>
 
         <div className="rounded-3xl p-6" style={{background: '#090E17', border: '1px solid #1C2A3A'}}>

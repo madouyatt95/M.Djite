@@ -80,18 +80,18 @@ export default function Projects() {
               </div>
               
               <div className="flex-1 min-w-0 py-1 flex flex-col justify-between h-[88px]">
-                <div>
-                  <div className="flex items-start justify-between gap-2 mb-1">
+                <div className="flex items-start justify-between gap-2 mb-1">
+                  <div className="flex-1 min-w-0">
                     <h3 className="text-base font-bold text-white truncate">{p.name}</h3>
-                    <span className="px-2.5 py-1 rounded-full text-[11px] font-bold flex-shrink-0" style={{ background: bStyle.bg, color: bStyle.text }}>
-                      {p.status}
-                    </span>
+                    <p className="text-sm text-gray-text truncate font-medium">{p.sector}</p>
                   </div>
-                  <p className="text-sm text-gray-text truncate font-medium">{p.sector}</p>
+                  <span className="px-2.5 py-1 rounded-full text-[11px] font-bold flex-shrink-0" style={{ background: bStyle.bg, color: bStyle.text }}>
+                    {p.status}
+                  </span>
                 </div>
                 
-                <div className="text-right mt-auto">
-                  <p className="text-lg font-extrabold text-white">{formatAmount(p.investmentInitial)} <span className="text-[11px] text-gray-text font-normal">FCFA</span></p>
+                <div className="text-right mt-auto flex-shrink-0">
+                  <p className="text-base font-extrabold text-white truncate">{formatAmount(p.investmentInitial)} <span className="text-[11px] text-gray-text font-normal">FCFA</span></p>
                 </div>
               </div>
             </button>
