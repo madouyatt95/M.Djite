@@ -16,7 +16,7 @@ export default function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="h-full flex items-center justify-center">
+      <div className="page-scroll flex items-center justify-center">
         <p className="text-gray-text">Projet non trouvé</p>
       </div>
     );
@@ -26,7 +26,7 @@ export default function ProjectDetail() {
   const benefitPrefix = project.benefitNet >= 0 ? '+' : '';
 
   return (
-    <div className="h-full scroll-hidden page-enter">
+    <div className="page-scroll page-enter bg-dark">
       {/* Cover Image */}
       <div className="relative h-56">
         <img 
@@ -41,7 +41,7 @@ export default function ProjectDetail() {
         {/* Back button */}
         <button 
           onClick={() => navigate(-1)}
-          className="absolute top-12 left-5 w-10 h-10 rounded-full bg-dark/60 backdrop-blur-sm flex items-center justify-center border border-white/10"
+          className="absolute top-14 left-5 w-10 h-10 rounded-full bg-dark/60 backdrop-blur-sm flex items-center justify-center border border-white/10"
         >
           <ArrowLeft size={20} className="text-white" />
         </button>
@@ -59,7 +59,7 @@ export default function ProjectDetail() {
       </div>
 
       {/* KPI Cards */}
-      <div className="px-5 -mt-2 space-y-5 pb-6">
+      <div className="px-5 space-y-5 pb-8">
         <div className="grid grid-cols-2 gap-3 mt-5">
           <div className="glass-card p-4">
             <div className="flex items-center gap-2 mb-2">

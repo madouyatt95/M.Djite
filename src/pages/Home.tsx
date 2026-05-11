@@ -22,7 +22,7 @@ export default function Home() {
   const totalProjects = projects.length;
 
   return (
-    <div className="h-full scroll-hidden page-enter">
+    <div className="page-scroll page-enter bg-dark">
       {/* Hero section with skyline */}
       <div className="relative">
         <div 
@@ -39,7 +39,7 @@ export default function Home() {
         }} />
 
         {/* Header */}
-        <div className="relative z-10 px-5 pt-12 pb-4">
+        <div className="relative z-10 px-5 pt-14 pb-4">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl overflow-hidden" style={{
@@ -80,7 +80,7 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 px-5 -mt-2 pb-6 space-y-5">
+      <div className="relative z-10 px-5 -mt-2 pb-8 space-y-5">
         {/* Total Investi Card */}
         <div className="glass-card p-5" style={{
           background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(11, 18, 32, 0.9))',
@@ -139,7 +139,7 @@ export default function Home() {
         <div className="glass-card p-5">
           <h3 className="text-sm font-semibold text-white mb-4">Répartition par Secteur</h3>
           <div className="flex items-center gap-4">
-            <div className="w-36 h-36">
+            <div className="w-36 h-36 flex-shrink-0">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -163,7 +163,7 @@ export default function Home() {
               {sectorData.map((item) => (
                 <div key={item.name} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }} />
                     <span className="text-xs text-gray-text">{item.name}</span>
                   </div>
                   <span className="text-xs font-medium text-white">{item.value}%</span>

@@ -27,9 +27,9 @@ export default function Projects() {
   });
 
   return (
-    <div className="h-full flex flex-col page-enter">
-      {/* Header */}
-      <div className="px-5 pt-12 pb-4">
+    <div className="page-scroll page-enter bg-dark">
+      {/* Header - sticky */}
+      <div className="sticky top-0 z-20 bg-dark px-5 pt-14 pb-3">
         <div className="flex items-center justify-between mb-5">
           <h1 className="text-xl font-bold text-white">Mes Projets</h1>
           <button 
@@ -54,7 +54,7 @@ export default function Projects() {
         </div>
 
         {/* Filters */}
-        <div className="flex gap-2 overflow-x-auto scroll-hidden">
+        <div className="flex gap-2 overflow-x-auto scroll-hidden pb-1">
           {filters.map((filter) => (
             <button
               key={filter}
@@ -72,7 +72,7 @@ export default function Projects() {
       </div>
 
       {/* Project List */}
-      <div className="flex-1 px-5 pb-4 scroll-hidden space-y-3">
+      <div className="px-5 pb-8 space-y-3">
         {filteredProjects.map((project, i) => (
           <button
             key={project.id}
@@ -106,10 +106,11 @@ export default function Projects() {
       {/* FAB */}
       <button
         onClick={() => navigate('/add-project')}
-        className="absolute bottom-24 right-5 w-14 h-14 rounded-full bg-gold flex items-center justify-center z-20 transition-transform hover:scale-110 active:scale-95"
+        className="fixed bottom-24 right-1/2 translate-x-[calc(215px-28px)] w-14 h-14 rounded-full bg-gold flex items-center justify-center z-20 transition-transform hover:scale-110 active:scale-95"
         style={{ 
           boxShadow: '0 6px 24px rgba(212, 175, 55, 0.4)',
-          animation: 'pulse-gold 2s infinite'
+          animation: 'pulse-gold 2s infinite',
+          maxWidth: '430px',
         }}
       >
         <Plus size={24} className="text-dark" strokeWidth={3} />

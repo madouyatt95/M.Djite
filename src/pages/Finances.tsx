@@ -30,8 +30,8 @@ export default function Finances() {
   const [_period] = useState('Année en cours');
 
   return (
-    <div className="h-full scroll-hidden page-enter">
-      <div className="px-5 pt-12 pb-6 space-y-5">
+    <div className="page-scroll page-enter bg-dark">
+      <div className="px-5 pt-14 pb-8 space-y-5">
         {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-white">Finances</h1>
@@ -68,7 +68,7 @@ export default function Finances() {
         {/* Line Chart */}
         <div className="glass-card p-5">
           <h3 className="text-sm font-semibold text-white mb-4">Évolution Mensuelle</h3>
-          <div className="h-48">
+          <div className="h-48 -ml-2">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={monthlyData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(31, 41, 55, 0.3)" />
@@ -109,7 +109,7 @@ export default function Finances() {
         <div className="glass-card p-5">
           <h3 className="text-sm font-semibold text-white mb-4">Répartition des Dépenses</h3>
           <div className="flex items-center gap-4">
-            <div className="w-36 h-36">
+            <div className="w-36 h-36 flex-shrink-0">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -133,7 +133,7 @@ export default function Finances() {
               {expenseBreakdown.map((item) => (
                 <div key={item.name} className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }} />
                     <span className="text-xs text-gray-text">{item.name}</span>
                   </div>
                   <span className="text-xs font-medium text-white">{item.value}%</span>

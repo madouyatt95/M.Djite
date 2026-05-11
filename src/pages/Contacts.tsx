@@ -16,9 +16,9 @@ export default function Contacts() {
   });
 
   return (
-    <div className="h-full flex flex-col page-enter">
-      <div className="px-5 pt-12 pb-4">
-        {/* Header */}
+    <div className="page-scroll page-enter bg-dark">
+      {/* Header - sticky */}
+      <div className="sticky top-0 z-20 bg-dark px-5 pt-14 pb-3">
         <h1 className="text-xl font-bold text-white mb-5">Contacts</h1>
 
         {/* Search */}
@@ -34,7 +34,7 @@ export default function Contacts() {
         </div>
 
         {/* Category filters */}
-        <div className="flex gap-2 overflow-x-auto scroll-hidden">
+        <div className="flex gap-2 overflow-x-auto scroll-hidden pb-1">
           {contactCategories.map((cat) => (
             <button
               key={cat}
@@ -52,7 +52,7 @@ export default function Contacts() {
       </div>
 
       {/* Contact List */}
-      <div className="flex-1 px-5 pb-4 scroll-hidden space-y-3">
+      <div className="px-5 pb-8 space-y-3">
         {filteredContacts.map((contact, i) => (
           <button
             key={contact.id}

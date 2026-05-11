@@ -79,8 +79,8 @@ export default function Charts() {
   const [activeTab, setActiveTab] = useState('Investissements');
 
   return (
-    <div className="h-full scroll-hidden page-enter">
-      <div className="px-5 pt-12 pb-6 space-y-5">
+    <div className="page-scroll page-enter bg-dark">
+      <div className="px-5 pt-14 pb-8 space-y-5">
         {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-white">Graphiques</h1>
@@ -109,7 +109,7 @@ export default function Charts() {
         {/* Main Line Chart */}
         <div className="glass-card p-5">
           <h3 className="text-sm font-semibold text-white mb-4">{titleMap[activeTab]}</h3>
-          <div className="h-52">
+          <div className="h-52 -ml-2">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={dataMap[activeTab]}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(31, 41, 55, 0.3)" />
@@ -140,7 +140,7 @@ export default function Charts() {
         {/* Bar Chart by Sector */}
         <div className="glass-card p-5">
           <h3 className="text-sm font-semibold text-white mb-4">Par secteur (en millions FCFA)</h3>
-          <div className="h-52">
+          <div className="h-52 -ml-2">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={sectorBarData} barCategoryGap="20%">
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(31, 41, 55, 0.3)" vertical={false} />
@@ -168,4 +168,3 @@ export default function Charts() {
     </div>
   );
 }
-

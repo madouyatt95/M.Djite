@@ -19,9 +19,9 @@ export default function Documents() {
   });
 
   return (
-    <div className="h-full flex flex-col page-enter">
-      <div className="px-5 pt-12 pb-4">
-        {/* Header */}
+    <div className="page-scroll page-enter bg-dark">
+      {/* Header - sticky */}
+      <div className="sticky top-0 z-20 bg-dark px-5 pt-14 pb-3">
         <h1 className="text-xl font-bold text-white mb-5">Documents</h1>
 
         {/* Search */}
@@ -37,7 +37,7 @@ export default function Documents() {
         </div>
 
         {/* Filters */}
-        <div className="flex gap-2 overflow-x-auto scroll-hidden">
+        <div className="flex gap-2 overflow-x-auto scroll-hidden pb-1">
           {documentFilters.map((filter) => (
             <button
               key={filter}
@@ -55,7 +55,7 @@ export default function Documents() {
       </div>
 
       {/* Document List */}
-      <div className="flex-1 px-5 pb-4 scroll-hidden space-y-3">
+      <div className="px-5 pb-8 space-y-3">
         {filteredDocs.map((doc, i) => {
           const typeInfo = typeIconMap[doc.type];
           const Icon = typeInfo.icon;

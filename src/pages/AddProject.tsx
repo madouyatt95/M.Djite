@@ -10,20 +10,19 @@ export default function AddProject() {
   const [formData, setFormData] = useState({
     name: '',
     sector: '',
-    location: 'Ex : Dakar, Sénégal',
+    location: '',
     status: 'Idée',
     amount: '',
   });
 
   const handleSubmit = () => {
-    // In a real app this would save to Supabase
     alert('Projet enregistré avec succès !');
     navigate('/projects');
   };
 
   return (
-    <div className="h-full scroll-hidden page-enter">
-      <div className="px-5 pt-12 pb-6 space-y-6">
+    <div className="page-scroll page-enter bg-dark">
+      <div className="px-5 pt-14 pb-8 space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
           <button 

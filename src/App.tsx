@@ -30,8 +30,8 @@ function App() {
 
   return (
     <Router>
-      <div className="h-full flex flex-col bg-dark">
-        <div className="flex-1 overflow-hidden relative">
+      <div className="h-full flex flex-col bg-dark overflow-hidden">
+        <div className="flex-1 min-h-0 relative">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects" element={<Projects />} />

@@ -15,8 +15,8 @@ export default function Settings() {
   const navigate = useNavigate();
 
   return (
-    <div className="h-full scroll-hidden page-enter">
-      <div className="px-5 pt-12 pb-6 space-y-6">
+    <div className="page-scroll page-enter bg-dark">
+      <div className="px-5 pt-14 pb-8 space-y-6">
         {/* Back */}
         <button 
           onClick={() => navigate(-1)}
@@ -30,7 +30,7 @@ export default function Settings() {
 
         {/* Profile card */}
         <div className="glass-card p-5 flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full overflow-hidden" style={{
+          <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0" style={{
             border: '2px solid rgba(212, 175, 55, 0.4)',
           }}>
             <img src="/images/avatar_user.png" alt="M. Djité" className="w-full h-full object-cover" />
@@ -51,21 +51,21 @@ export default function Settings() {
                 className="w-full glass-card-sm p-4 flex items-center gap-4 text-left transition-all hover:border-gold/20 active:scale-[0.98]"
                 style={{ animationDelay: `${i * 60}ms`, animation: 'fadeInUp 0.4s ease-out forwards', opacity: 0 }}
               >
-                <div className="w-10 h-10 rounded-2xl flex items-center justify-center" style={{
+                <div className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0" style={{
                   backgroundColor: `${section.color}15`,
                 }}>
                   <Icon size={18} style={{ color: section.color }} />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <h3 className="text-sm font-medium text-white">{section.label}</h3>
-                  {section.desc && <p className="text-xs text-gray-text">{section.desc}</p>}
+                  {section.desc && <p className="text-xs text-gray-text truncate">{section.desc}</p>}
                 </div>
                 {section.toggle ? (
-                  <div className="w-11 h-6 rounded-full bg-gold/30 flex items-center px-0.5">
+                  <div className="w-11 h-6 rounded-full bg-gold/30 flex items-center px-0.5 flex-shrink-0">
                     <div className="w-5 h-5 rounded-full bg-gold ml-auto" />
                   </div>
                 ) : (
-                  <ChevronRight size={16} className="text-gray-text" />
+                  <ChevronRight size={16} className="text-gray-text flex-shrink-0" />
                 )}
               </button>
             );
