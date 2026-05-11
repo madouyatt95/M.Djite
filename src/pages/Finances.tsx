@@ -31,44 +31,47 @@ export default function Finances() {
 
   return (
     <div className="page-scroll page-enter bg-dark">
-      <div className="px-5 pt-14 pb-8 space-y-5">
+      <div className="px-5 pt-[env(safe-area-inset-top,48px)] pb-8 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-white">Finances</h1>
-          <button className="flex items-center gap-1 glass-card-sm px-3 py-1.5 text-xs text-white">
+          <h1 className="text-[20px] font-bold text-white">Finances</h1>
+          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[12px] text-white" style={{
+            background: 'rgba(11, 18, 32, 0.7)',
+            border: '1px solid rgba(212, 175, 55, 0.15)',
+          }}>
             <span>Année en cours</span>
-            <ChevronDown size={14} />
+            <ChevronDown size={13} />
           </button>
         </div>
 
         {/* KPI Cards */}
         <div className="grid grid-cols-2 gap-3">
-          <div className="glass-card p-4" style={{ borderColor: 'rgba(212, 175, 55, 0.2)' }}>
-            <p className="text-gray-text text-xs mb-1">Investi</p>
-            <p className="text-base font-bold text-white">{formatFullAmount(getTotalInvested())}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
+          <div className="glass-card-gold p-4">
+            <p className="text-gray-text text-[11px] mb-2 uppercase tracking-wide">Investi</p>
+            <p className="text-[16px] font-bold text-white leading-tight">{formatFullAmount(getTotalInvested())}</p>
+            <p className="text-[10px] text-gray-text mt-1">FCFA</p>
           </div>
           <div className="glass-card p-4">
-            <p className="text-gray-text text-xs mb-1">Revenus</p>
-            <p className="text-base font-bold text-white">{formatFullAmount(getTotalRevenues())}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
+            <p className="text-gray-text text-[11px] mb-2 uppercase tracking-wide">Revenus</p>
+            <p className="text-[16px] font-bold text-white leading-tight">{formatFullAmount(getTotalRevenues())}</p>
+            <p className="text-[10px] text-gray-text mt-1">FCFA</p>
           </div>
           <div className="glass-card p-4">
-            <p className="text-gray-text text-xs mb-1">Bénéfices</p>
-            <p className="text-base font-bold text-success">{formatFullAmount(getTotalBenefits())}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
+            <p className="text-gray-text text-[11px] mb-2 uppercase tracking-wide">Bénéfices</p>
+            <p className="text-[16px] font-bold text-success leading-tight">{formatFullAmount(getTotalBenefits())}</p>
+            <p className="text-[10px] text-gray-text mt-1">FCFA</p>
           </div>
           <div className="glass-card p-4">
-            <p className="text-gray-text text-xs mb-1">Dépenses</p>
-            <p className="text-base font-bold text-danger">{formatFullAmount(getTotalExpenses())}</p>
-            <p className="text-[10px] text-gray-text">FCFA</p>
+            <p className="text-gray-text text-[11px] mb-2 uppercase tracking-wide">Dépenses</p>
+            <p className="text-[16px] font-bold text-danger leading-tight">{formatFullAmount(getTotalExpenses())}</p>
+            <p className="text-[10px] text-gray-text mt-1">FCFA</p>
           </div>
         </div>
 
         {/* Line Chart */}
         <div className="glass-card p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Évolution Mensuelle</h3>
-          <div className="h-48 -ml-2">
+          <h3 className="text-[14px] font-bold text-white mb-5">Évolution Mensuelle</h3>
+          <div className="h-[200px] -ml-3">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={monthlyData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(31, 41, 55, 0.3)" />
@@ -76,11 +79,12 @@ export default function Finances() {
                 <YAxis tick={{ fill: '#9CA3AF', fontSize: 10 }} axisLine={false} tickLine={false} width={30} />
                 <Tooltip 
                   contentStyle={{ 
-                    background: '#0B1220', 
+                    background: 'rgba(11, 18, 32, 0.95)', 
                     border: '1px solid rgba(212, 175, 55, 0.2)', 
                     borderRadius: '12px',
                     fontSize: '11px',
-                    color: 'white'
+                    color: 'white',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
                   }}
                 />
                 <Line type="monotone" dataKey="investissements" stroke="#D4AF37" strokeWidth={2} dot={false} />
@@ -89,35 +93,33 @@ export default function Finances() {
               </LineChart>
             </ResponsiveContainer>
           </div>
-          <div className="flex items-center justify-center gap-4 mt-3">
-            <div className="flex items-center gap-1.5">
-              <div className="w-3 h-0.5 bg-gold rounded" />
-              <span className="text-[10px] text-gray-text">Investissements</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-3 h-0.5 bg-electric-blue rounded" />
-              <span className="text-[10px] text-gray-text">Revenus</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <div className="w-3 h-0.5 bg-success rounded" />
-              <span className="text-[10px] text-gray-text">Bénéfices</span>
-            </div>
+          <div className="flex items-center justify-center gap-5 mt-4">
+            {[
+              { color: '#D4AF37', label: 'Investissements' },
+              { color: '#0EA5FF', label: 'Revenus' },
+              { color: '#22C55E', label: 'Bénéfices' },
+            ].map(item => (
+              <div key={item.label} className="flex items-center gap-1.5">
+                <div className="w-3 h-[3px] rounded-full" style={{ backgroundColor: item.color }} />
+                <span className="text-[10px] text-gray-text">{item.label}</span>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Expense Breakdown Donut */}
         <div className="glass-card p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Répartition des Dépenses</h3>
-          <div className="flex items-center gap-4">
-            <div className="w-36 h-36 flex-shrink-0">
+          <h3 className="text-[14px] font-bold text-white mb-5">Répartition des Dépenses</h3>
+          <div className="flex items-center">
+            <div className="w-[140px] h-[140px] flex-shrink-0">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={expenseBreakdown}
                     cx="50%"
                     cy="50%"
-                    innerRadius={35}
-                    outerRadius={60}
+                    innerRadius={38}
+                    outerRadius={62}
                     paddingAngle={3}
                     dataKey="value"
                     stroke="none"
@@ -129,14 +131,17 @@ export default function Finances() {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="flex-1 space-y-2">
+            <div className="flex-1 ml-4 space-y-2.5">
               {expenseBreakdown.map((item) => (
                 <div key={item.name} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }} />
-                    <span className="text-xs text-gray-text">{item.name}</span>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ 
+                      backgroundColor: item.color,
+                      boxShadow: `0 0 6px ${item.color}40`,
+                    }} />
+                    <span className="text-[12px] text-gray-text">{item.name}</span>
                   </div>
-                  <span className="text-xs font-medium text-white">{item.value}%</span>
+                  <span className="text-[12px] font-semibold text-white">{item.value}%</span>
                 </div>
               ))}
             </div>

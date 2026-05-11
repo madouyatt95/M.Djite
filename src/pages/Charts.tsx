@@ -80,7 +80,7 @@ export default function Charts() {
 
   return (
     <div className="page-scroll page-enter bg-dark">
-      <div className="px-5 pt-14 pb-8 space-y-5">
+      <div className="px-5 pt-[env(safe-area-inset-top,48px)] pb-8 space-y-4">
         {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-bold text-white">Graphiques</h1>
