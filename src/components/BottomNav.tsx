@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Home, FolderKanban, Wallet, BarChart3, MoreHorizontal } from 'lucide-react';
+import { Home, FolderKanban, Wallet, BarChart3, Menu } from 'lucide-react';
 import { useState } from 'react';
 
 const tabs = [
@@ -7,7 +7,7 @@ const tabs = [
   { id: 'projects', label: 'Projets', icon: FolderKanban, path: '/projects' },
   { id: 'finances', label: 'Finances', icon: Wallet, path: '/finances' },
   { id: 'charts', label: 'Graphiques', icon: BarChart3, path: '/charts' },
-  { id: 'more', label: 'Plus', icon: MoreHorizontal, path: '' },
+  { id: 'more', label: 'Plus', icon: Menu, path: '' },
 ];
 
 const moreItems = [

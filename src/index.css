@@ -60,6 +60,24 @@ html, body {
   border-radius: 16px;
   padding: 16px;
 }
+.card-blue {
+  background: linear-gradient(180deg, rgba(14, 165, 255, 0.1) 0%, rgba(5, 7, 11, 0.9) 100%);
+  border: 1px solid rgba(14, 165, 255, 0.3);
+  border-radius: 16px;
+  padding: 16px;
+}
+.card-green {
+  background: #05070B;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+}
+.card-dark {
+  background: #05070B;
+  border: 1px solid #1C2A3A;
+  border-radius: 12px;
+  padding: 12px;
+}
 .card-sm {
   background: #0C1422;
   border: 1px solid #1C2A3A;
